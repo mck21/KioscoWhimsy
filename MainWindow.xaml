@@ -1,0 +1,116 @@
+﻿<Window x:Class="Kiosco_Whimsy.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"       
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Kiosco_Whimsy"
+        mc:Ignorable="d"
+        Title="Whimsy" Height="700" Width="1200"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        >
+
+
+    <Border CornerRadius="28" Background="#151515">
+        <DockPanel x:Name="Main">
+            <!-- Header -->
+            <Grid x:Name="Header" Height="50" DockPanel.Dock="Top" VerticalAlignment="Top" Background="Transparent">
+                <Border CornerRadius="25 25 0 0" >
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                            <GradientStop Color="#000002" Offset="0.0"/>
+                            <GradientStop Color="#18000b" Offset="1.0"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="160"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Logo y Titulo -->
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="Recursos/Iconos/Sweet.png" Width="45" Margin="22 0 0 0"/>
+                        <TextBlock Text="W H I M S Y" VerticalAlignment="Center" FontWeight="Bold" FontSize="18" 
+                                   Foreground="WhiteSmoke" Margin="15 0 0 0" FontFamily="Trebuchet MS"/>
+                    </StackPanel>
+
+                    <!-- Opciones Cuenta: Cambiar contraseña usuario, Maximizar ventana y Cerrar App  -->
+                    <StackPanel Orientation="Horizontal" Grid.Column="1">
+                        <Button x:Name="btnContrasenya" Click="btnContrasenya_Click" Cursor="Hand" Height="35" Width="35" Style="{DynamicResource MaterialDesignIconForegroundButton}">
+                            <Image Source="/Recursos/Iconos/FlowbiteUserSettingsSolid.png" Height="24"/>
+                        </Button>
+                        <Button x:Name="btnMaximizar" Click="btnMaximizar_Click" Cursor="Hand" Height="35" Width="35" 
+                                Style="{DynamicResource MaterialDesignIconForegroundButton}" Margin="15 0 15 0">
+                            <Image x:Name="btnMaximizarImage" Source="/Recursos/Iconos/PajamasMaximize.png" Height="18" Cursor="Hand"/>
+                        </Button>
+                        <Button x:Name="btnCerrar" Click="btnCerrar_Click" Cursor="Hand" Height="35" Width="35" 
+                                Style="{DynamicResource MaterialDesignIconForegroundButton}" >
+                            <Image Source="/Recursos/Iconos/MdiCloseCircleOutline.png" Height="24"/>
+                        </Button>
+                    </StackPanel>
+
+                </Grid>
+            </Grid>
+
+            <!-- Left Menu -->
+            <Border DockPanel.Dock="Left"  Width="200" CornerRadius="0 0 0 25">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                        <GradientStop Color="#000002" Offset="0.0"/>
+                        <GradientStop Color="#040003" Offset="1.0"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <StackPanel x:Name="Menu" Margin="10">
+                    <!-- Inicio -->
+                    <Button x:Name="btnInicio" MouseDoubleClick="btnInicio_MouseDoubleClick" Height="70" BorderBrush="Transparent" Background="Transparent" Style="{StaticResource MaterialDesignOutlinedLightButton}">
+                        <StackPanel Orientation="Horizontal">
+                            <mat:PackIcon Kind="House" Width="35" Height="40" Margin="-10 10 10 0" Foreground="White" />
+                            <TextBlock Text="Inicio    " Padding="4 17" FontSize="20" Foreground="White"/>
+                        </StackPanel>
+                    </Button>
+                    <!-- Gestion Ventas: Forms introducir, modificar, eliminar -->
+                    <Button x:Name="btnVentas" MouseDoubleClick="btnVentas_MouseDoubleClick" Height="70" BorderBrush="Transparent" Background="Transparent" Style="{StaticResource MaterialDesignOutlinedLightButton}">
+                        <StackPanel Orientation="Horizontal">
+                            <mat:PackIcon Kind="Shop" Width="35" Height="40" Margin="-17 10 10 0" Foreground="White" />
+                            <TextBlock Text="Ventas " Padding="4 17" Margin="0 0 0 0" FontSize="20" Foreground="White"/>
+                        </StackPanel>
+                    </Button>
+
+                    <!-- Gestion Stock: Introducir, Modificar productos -->
+                    <Button x:Name="btnStock" MouseDoubleClick="btnStock_MouseDoubleClick" Height="70" BorderBrush="Transparent" Background="Transparent" Style="{StaticResource MaterialDesignOutlinedLightButton}">
+                        <StackPanel Orientation="Horizontal">
+                            <mat:PackIcon Kind="Package" Width="35" Height="40" Margin="-13 10 10 0" Foreground="White" />
+                            <TextBlock Text="Stock    " Padding="4 17" FontSize="20" Foreground="White"/>
+                        </StackPanel>
+                    </Button>
+
+                    <!-- Gestion Usuarios -->
+                    <Button x:Name="btnUsuarios" MouseDoubleClick="btnUsuarios_MouseDoubleClick" Height="70" BorderBrush="Transparent" Background="Transparent" Style="{StaticResource MaterialDesignOutlinedLightButton}">
+                        <StackPanel Orientation="Horizontal">
+                            <mat:PackIcon Kind="User" Width="35" Height="40" Margin="-10 10 10 0" Foreground="White" />
+                            <TextBlock Text="Usuarios" Padding="4 17" FontSize="20" Foreground="White"/>
+                        </StackPanel>
+                    </Button>
+
+                    <!-- Gestion Campañas de publicidad a traves de Facebook -->
+                    <Button x:Name="btnCampanyasPublicidad" MouseDoubleClick="btnCampanyasPublicidad_MouseDoubleClick" Height="70" Width="200" BorderBrush="Transparent" Background="Transparent" Style="{StaticResource MaterialDesignOutlinedLightButton}">
+                        <StackPanel Orientation="Horizontal">
+                            <mat:PackIcon Kind="Facebook" Width="35" Height="40" Margin="-12 10 10 0" Foreground="White" />
+                            <TextBlock Text="Publicidad" Padding="4 17" FontSize="20" Foreground="White"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </Border>
+            <!-- Contenido Central -->
+            <Grid x:Name="panelCentral">
+
+            </Grid>
+        </DockPanel>
+    </Border>
+</Window>

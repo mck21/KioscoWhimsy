@@ -1,0 +1,151 @@
+﻿<mah:MetroWindow x:Class="Kiosco_Whimsy.Frontend.Dialogos.DialogoCambioContrasenya"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Kiosco_Whimsy.Frontend.Dialogos"
+        mc:Ignorable="d"
+        Title="DialogoCambioContrasenya" Height="420" Width="680" ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        AllowsTransparency="True"                 
+        BorderBrush="DarkGray"
+        BorderThickness="1"
+        ShowTitleBar="False"
+        ShowCloseButton="False"
+        ShowMaxRestoreButton="False"
+        ShowMinButton="False"
+        >
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Fondo degradado de izq a der -->
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                <GradientStop Color="#000002" Offset="0.0"/>
+                <GradientStop Color="#18000b" Offset="1.0"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <!-- Popup Correcto -->
+        <Popup Placement="Center" IsOpen="False" x:Name="popCorrecto">
+            <StackPanel Background="#E60B60">
+                <mat:PackIcon Kind="OkRu" Margin="0 10 0 0"
+                              HorizontalAlignment="Center"
+                              Width="55" Height="35"
+                              Foreground="White"/>
+                <TextBlock Text="Contraseña actualizada con éxito" Foreground="White" Margin="10"/>
+            </StackPanel>
+        </Popup>
+        
+        <!-- Icono -->
+        <Image Source="/Recursos/Iconos/MdiLockReset.png" Height="50" Margin="0 22 0 0"/>
+
+        <!-- Button Cerrar-->
+        <Button x:Name="btnCerrar" 
+                Click="btnCerrar_Click"
+                Cursor="Hand"
+                Height="40"
+                Width="40" 
+                HorizontalAlignment="Right"
+                Margin="0 0 20 0"
+                Style="{DynamicResource MaterialDesignIconForegroundButton}" >
+            <Image Source="/Recursos/Iconos/MdiCloseCircleOutline.png" Height="24"/>
+        </Button>
+        
+        <!-- Título -->
+        <TextBlock Text="M O D I F I C A R   C O N T R A S E Ñ A"
+                   Grid.Row="1"
+                   FontFamily="Trebuchet MS" 
+                   FontSize="21"  
+                   FontWeight="Bold" 
+                   Foreground="White" 
+                   HorizontalAlignment="Center" 
+                   Margin="0 15 0 0"/>
+        
+        <!-- Text -->
+        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center" Width="400">
+            <TextBlock Text="Escriba su contraseña actual:" 
+                       Foreground="LightGray" 
+                       Margin="0 30 100 0" 
+                       HorizontalAlignment="Center"/>
+        </StackPanel>
+        
+        <!-- Password Antigua -->
+        <PasswordBox x:Name="passAntigua"
+                      Grid.Row="3" 
+                      Height="35" 
+                      Width="400"                          
+                      HorizontalAlignment="Center"
+                      Margin="0 5 0 0" 
+                      mat:HintAssist.Hint="* * * * * * * * * *" 
+                      FontWeight="Bold" 
+                      FontSize="15" 
+                      VerticalContentAlignment="Bottom" 
+                      Style="{StaticResource MaterialDesignPasswordBox}"  
+                      Foreground="White"
+                      BorderBrush="#E60B60"/>
+
+        <!-- Text -->
+        <StackPanel Orientation="Horizontal" Grid.Row="4" HorizontalAlignment="Center" Width="400">
+            <TextBlock Text="Escriba su nueva contraseña:" 
+                       Foreground="LightGray" 
+                       Margin="0 25 100 0" 
+                       HorizontalAlignment="Center"/>   
+        </StackPanel>
+        
+        <!-- Password Nueva -->
+        <PasswordBox x:Name="passNueva"
+                     Grid.Row="5" 
+                     Height="35" 
+                     Width="400"                          
+                     HorizontalAlignment="Center"
+                     Margin="0 5 0 0" 
+                     mat:HintAssist.Hint="* * * * * * * * * *" 
+                     FontWeight="Bold" 
+                     FontSize="15" 
+                     VerticalContentAlignment="Bottom" 
+                     Style="{StaticResource MaterialDesignPasswordBox}"  
+                     Foreground="White"
+                     BorderBrush="#E60B60"/>
+        
+        <!-- Buttons Cancelar y Guardar -->
+        <StackPanel Grid.Row="6"
+                    HorizontalAlignment="Right"
+                    Margin="0 50 130 0"
+                    Orientation="Horizontal" >
+            <Button x:Name="btnCancelar"
+                    Click="btnCancelar_Click"
+                    Content="CANCELAR" 
+                    Background="#252525" 
+                    BorderBrush="Transparent" 
+                    mat:ButtonAssist.CornerRadius="8" 
+                    Margin="0 0 50 0" 
+                    FontSize="10" 
+                    Height="40"
+                    Width="100"
+                    Style="{StaticResource MaterialDesignFlatDarkBgButton}"/>
+            <Button x:Name="btnGuardar"
+                    Click="btnGuardar_Click"
+                    Content="GUARDAR" 
+                    Background="#E60B60" 
+                    BorderBrush="Transparent" 
+                    mat:ButtonAssist.CornerRadius="8"
+                    FontSize="10" 
+                    Height="40" 
+                    Width="100" 
+                    Style="{StaticResource MaterialDesignFlatDarkBgButton}"/>
+        </StackPanel>        
+    </Grid>
+</mah:MetroWindow>
