@@ -6,6 +6,7 @@ using Kiosco_Whimsy.MVVM;
 using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,6 +34,14 @@ namespace Kiosco_Whimsy
         private MVUsuario mvUsuario;
 
         /// <summary>
+        /// Panel Central accesible desde cualquier clase
+        /// </summary>
+        public Grid PanelCentral
+        {
+            get { return panelCentral; }
+        }
+
+        /// <summary>
         /// Constructor que pasa el contexto de la base de datos, el usuario que ha iniciado sesión 
         /// y el viewModel de usuario que despues instancia con el contexto de la base de datos
         /// Además, modifica la visibilidad de las funciones de la ventana principal dependiendo del 
@@ -48,6 +57,8 @@ namespace Kiosco_Whimsy
             mvUsuario = new MVUsuario(kioscoContext, usuLogin);
             this.mvUsuario.usuLogin = usuLogin;
             this.DataContext = mvUsuario;
+
+            btnMaximizar.IsEnabled = false;
 
             UCCircuito uc = new UCCircuito();
             if (panelCentral.Children != null)
@@ -139,6 +150,8 @@ namespace Kiosco_Whimsy
         {
             panelCentral.Children.Clear();
 
+            btnMaximizar.IsEnabled = true;
+
             Image logo = new Image();
             logo.Source = new BitmapImage(new Uri("/Recursos/Iconos/SweetLogo.png", UriKind.Relative));
             logo.Height = 200;
@@ -150,28 +163,68 @@ namespace Kiosco_Whimsy
 
         private void btnVentas_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-
-        }
-
-        private void btnStock_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-
-        }
-
-        private void btnUsuarios_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            UCUsuarios uc = new UCUsuarios(kioscoContext);
+            btnMaximizar.IsEnabled = true;
+            //le paso el contexto para que pueda usar panelCentral
+            UCRegistroVentas uc = new UCRegistroVentas(kioscoContext, mvUsuario.usuLogin, this);
             if (panelCentral.Children != null)
             {
-
                 panelCentral.Children.Clear();
                 panelCentral.Children.Add(uc);
             }
         }
 
+        private void btnStock_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            btnMaximizar.IsEnabled = true;
+
+            UCProductos uc = new UCProductos(kioscoContext);
+            if (panelCentral.Children != null)
+            {
+                panelCentral.Children.Clear();
+                panelCentral.Children.Add(uc);
+            }
+        }
+
+        private void btnUsuarios_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            btnMaximizar.IsEnabled = true;
+
+            UCUsuarios uc = new UCUsuarios(kioscoContext);
+            if (panelCentral.Children != null)
+            {
+                panelCentral.Children.Clear();
+                panelCentral.Children.Add(uc);
+            }
+        }
+
+        /// <summary>
+        /// Boton que lleva a la pagina para crear un story en Facebook para realizar 
+        /// un post publicitario
+        /// La URL se abre en el navegador predeterminado
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCampanyasPublicidad_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            // URL a la pagina de crear un story en Facebook
+            string url = "https://www.facebook.com/stories/create";
 
+            // Abrir enlace en el navegador predeterminado
+            try
+            {
+                ProcessStartInfo psi = new ProcessStartInfo
+                {
+                    FileName = url,
+                    UseShellExecute = true
+                };
+                Process.Start(psi);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al abrir el enlace: {ex.Message}");
+            }
         }
+
+        
     }
 }

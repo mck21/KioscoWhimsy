@@ -6,6 +6,7 @@
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"       
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Kiosco_Whimsy"
+        xmlns:local2="clr-namespace:Kiosco_Whimsy.Frontend.ControlUsuario"
         mc:Ignorable="d"
         Title="Whimsy" Height="700" Width="1200"
         WindowStartupLocation="CenterScreen"

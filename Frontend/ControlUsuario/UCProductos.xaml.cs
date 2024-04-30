@@ -18,28 +18,37 @@ using System.Windows.Shapes;
 namespace Kiosco_Whimsy.Frontend.ControlUsuario
 {
     /// <summary>
-    /// Lógica de interacción para UCVentas.xaml
+    /// Lógica de interacción para UCProductos.xaml
     /// </summary>
-    public partial class UCVentas : UserControl
+    public partial class UCProductos : UserControl
     {
         private KioscoContext kioscoContext;
         private MVVenta mvVenta;
-        //private MVProducto mvProducto;
 
-        public UCVentas(KioscoContext kioscoContext, Usuario usuLogin)
+        public UCProductos(KioscoContext kioscoContext)
         {
             InitializeComponent();
             this.kioscoContext = kioscoContext;
-            mvVenta = new MVVenta(kioscoContext, usuLogin);
+            inicializa();
+        }
+
+        private void inicializa()
+        {
+            mvVenta = new MVVenta(kioscoContext);
             this.DataContext = mvVenta;
         }
 
-        private void btnCategoria_Click(object sender, RoutedEventArgs e)
+        private void btnAnyadirProducto_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void btnProducto_Click(object sender, RoutedEventArgs e)
+        private void btnEliminarItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnEditarItem_Click(object sender, RoutedEventArgs e)
         {
 
         }

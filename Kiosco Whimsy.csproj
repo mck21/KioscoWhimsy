@@ -11,6 +11,8 @@
   <ItemGroup>
     <None Remove="Recursos\GIF\SweetLoop.mp4" />
     <None Remove="Recursos\Iconos\AntDesignLoginOutlined.png" />
+    <None Remove="Recursos\Iconos\FaSolidCartPlus.png" />
+    <None Remove="Recursos\Iconos\FaSolidCartPlusWhite.png" />
     <None Remove="Recursos\Iconos\FlowbiteUserSettingsSolid.png" />
     <None Remove="Recursos\Iconos\Logo1.ico" />
     <None Remove="Recursos\Iconos\MdiCloseCircleOutline.png" />
@@ -23,8 +25,41 @@
     <None Remove="Recursos\Iconos\SolarCheckCircleBold.png" />
     <None Remove="Recursos\Iconos\Sweet.png" />
     <None Remove="Recursos\Iconos\SweetLogo.png" />
+    <None Remove="Recursos\Iconos\SweetR.png" />
+    <None Remove="Recursos\Imagenes\aftersun.png" />
+    <None Remove="Recursos\Imagenes\agua.png" />
+    <None Remove="Recursos\Imagenes\bebida.png" />
+    <None Remove="Recursos\Imagenes\cerveza.png" />
+    <None Remove="Recursos\Imagenes\chuches.png" />
+    <None Remove="Recursos\Imagenes\cocacola.png" />
+    <None Remove="Recursos\Imagenes\comida.png" />
     <None Remove="Recursos\Imagenes\flag.png" />
+    <None Remove="Recursos\Imagenes\helado.png" />
+    <None Remove="Recursos\Imagenes\herramientas.png" />
+    <None Remove="Recursos\Imagenes\juguetes.png" />
+    <None Remove="Recursos\Imagenes\lectura.png" />
+    <None Remove="Recursos\Imagenes\libro-cocina.png" />
+    <None Remove="Recursos\Imagenes\muneca.png" />
+    <None Remove="Recursos\Imagenes\nachos.png" />
     <None Remove="Recursos\Imagenes\NewspaperLogin.png" />
+    <None Remove="Recursos\Imagenes\novela.png" />
+    <None Remove="Recursos\Imagenes\pan-molde.png" />
+    <None Remove="Recursos\Imagenes\papas-fritas.png" />
+    <None Remove="Recursos\Imagenes\parafarma.png" />
+    <None Remove="Recursos\Imagenes\pelota.png" />
+    <None Remove="Recursos\Imagenes\poesia.png" />
+    <None Remove="Recursos\Imagenes\protector-solar.png" />
+    <None Remove="Recursos\Imagenes\repelente.png" />
+    <None Remove="Recursos\Imagenes\revista.png" />
+    <None Remove="Recursos\Imagenes\rompecabezas.png" />
+    <None Remove="Recursos\Imagenes\vino.png" />
+    <None Remove="Recursos\Imagenes\zumo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Recursos\Imagenes\revista.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
@@ -32,6 +67,12 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Recursos\Iconos\AntDesignLoginOutlined.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Recursos\Iconos\FaSolidCartPlus.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Recursos\Iconos\FaSolidCartPlusWhite.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Recursos\Iconos\FlowbiteUserSettingsSolid.png">
@@ -97,7 +138,85 @@
     <Resource Include="Recursos\Iconos\flag.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Recursos\Iconos\SweetR.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Recursos\Imagenes\aftersun.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Recursos\Imagenes\agua.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Recursos\Imagenes\bebida.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Recursos\Imagenes\cerveza.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Recursos\Imagenes\chuches.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Recursos\Imagenes\cocacola.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Recursos\Imagenes\comida.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Recursos\Imagenes\helado.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Recursos\Imagenes\herramientas.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Recursos\Imagenes\juguetes.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Recursos\Imagenes\lectura.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Recursos\Imagenes\libro-cocina.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Recursos\Imagenes\muneca.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Recursos\Imagenes\nachos.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Recursos\Imagenes\NewspaperLogin.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Recursos\Imagenes\novela.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Recursos\Imagenes\pan-molde.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Recursos\Imagenes\papas-fritas.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Recursos\Imagenes\parafarma.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Recursos\Imagenes\pelota.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Recursos\Imagenes\poesia.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Recursos\Imagenes\protector-solar.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Recursos\Imagenes\repelente.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Recursos\Imagenes\rompecabezas.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Recursos\Imagenes\vino.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Recursos\Imagenes\zumo.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

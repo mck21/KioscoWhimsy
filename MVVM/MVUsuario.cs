@@ -41,7 +41,8 @@ namespace Kiosco_Whimsy.MVVM
         }
 
         /// <summary>
-        /// Constructor que pasa el contexto de la base de datos
+        /// Constructor que pasa el contexto de la base de datos y el usuario que ha iniciado 
+        /// sesión
         /// </summary>
         /// <param name="kioscoContext"></param>
         public MVUsuario(KioscoContext kioscoContext, Usuario usuLogin) 
@@ -53,9 +54,7 @@ namespace Kiosco_Whimsy.MVVM
             servicio = new UsuarioServicio(kioscoContext);
             usuServ = (UsuarioServicio)servicio;
             
-        }
-
-        
+        }        
 
         /// <summary>
         /// Variable de usuLogin pública para ser recogida por el Binding en la interfaz
@@ -66,6 +65,9 @@ namespace Kiosco_Whimsy.MVVM
             set { _usuLogin = value; NotifyPropertyChanged(nameof(usuLogin)); }
         }
 
+        /// <summary>
+        /// Lista con todos los usuarios de la base de datos para recibirla en la interfaz
+        /// </summary>
         public List<Usuario> listaUsuarios { get { return usuServ.GetAll; } }
 
     }
