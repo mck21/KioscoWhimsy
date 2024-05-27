@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 namespace Kiosco_Whimsy.Backend.Servicios
 {
     /// <summary>
-    /// Servicio de Venta que hereda los métodos para interactuar con 
-    /// la tabla Venta en la base de datos
+    /// Servicio de Cliente que hereda los métodos para interactuar con 
+    /// la tabla Cliente en la base de datos
     /// </summary>
-    public class VentaServicio : ServicioGenerico<Venta>
+    public class ClienteServicio : ServicioGenerico<Cliente>
     {
         /// <summary>
         /// Contexto de la base de datos
@@ -23,7 +23,7 @@ namespace Kiosco_Whimsy.Backend.Servicios
         /// Constructor
         /// </summary>
         /// <param name="kioscoContext">Contexto de la base de datos</param>
-        public VentaServicio(KioscoContext kioscoContext) : base(kioscoContext)
+        public ClienteServicio(KioscoContext kioscoContext) : base(kioscoContext)
         {
             this.kioscoContext = kioscoContext;
         }

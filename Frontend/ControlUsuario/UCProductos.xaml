@@ -8,6 +8,26 @@
              xmlns:local="clr-namespace:Kiosco_Whimsy.Frontend.ControlUsuario"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <Style x:Key="DataGridRowStyle" TargetType="DataGridRow">
+            <Setter Property="Background" Value="#690028"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style x:Key="DataGridColumnHeaderStyle" TargetType="DataGridColumnHeader">
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Background" Value="#5e0023"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Padding" Value="6"/>
+        </Style>
+        <Style x:Key="DataGridTextElementStyle" TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Background" Value="#690028"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+    </UserControl.Resources>
+
     <DockPanel>
         <!-- Parte Superior -->
         <Grid DockPanel.Dock="Top">
@@ -19,7 +39,15 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-
+            <Popup Placement="Center" IsOpen="False" x:Name="popEliminado">
+                <StackPanel Background="Green">
+                    <mat:PackIcon Kind="Delete" Margin="0 10 0 0"
+                      HorizontalAlignment="Center"
+                      Width="55" Height="35"
+                      Foreground="White"/>
+                    <TextBlock Text="Producto eliminado de la base de datos" Foreground="White" Margin="10"/>
+                </StackPanel>
+            </Popup>
             <StackPanel Orientation="Horizontal" Margin="10">
                 <mat:PackIcon Kind="PackageVariant" Height="40" Width="40" Margin="6" Foreground="White"/>
                 <TextBlock  Text="GESTIÓN DE STOCK" FontSize="24" Margin="10" FontWeight="Bold" Foreground="White"/>
@@ -32,14 +60,21 @@
         <!-- Parte Central -->
 
         <!-- Datos de los usuarios -->
-        <DataGrid x:Name="dgProductos" AutoGenerateColumns="False" ColumnWidth="*" CanUserAddRows="False" ItemsSource="{Binding listaProductos}">
+        <DataGrid x:Name="dgProductos" AutoGenerateColumns="False" ColumnWidth="*" CanUserAddRows="False" ItemsSource="{Binding listaProductos2}"
+                  RowStyle="{StaticResource DataGridRowStyle}" ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}">
+            <DataGrid.Background>
+                <LinearGradientBrush StartPoint="1,0" EndPoint="1,1">
+                    <GradientStop Color="#5e0023" Offset="0"/>
+                    <GradientStop Color="#23000f" Offset="1"/>
+                </LinearGradientBrush>
+            </DataGrid.Background>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Producto" Binding="{Binding Descripcion}"/>
-                <DataGridTextColumn Header="Precio" Binding="{Binding Precio, StringFormat={}{0} €}"/>
-                <DataGridTextColumn Header="Ubicación" Binding="{Binding Ubicacion}"/>
-                <DataGridTextColumn Header="Stock" Binding="{Binding Stock}"/>
-                <DataGridTextColumn Header="Oferta" Binding="{Binding Oferta.Descripcion}"/>
-                <DataGridTextColumn Header="Categoria" Binding="{Binding Tipoproducto.Categoria}"/>
+                <DataGridTextColumn Header="Producto" Binding="{Binding Descripcion}" ElementStyle="{StaticResource DataGridTextElementStyle}"/>
+                <DataGridTextColumn Header="Precio" Binding="{Binding Precio, StringFormat={}{0:F2} €}" ElementStyle="{StaticResource DataGridTextElementStyle}"/>
+                <DataGridTextColumn Header="Ubicación" Binding="{Binding Ubicacion}" ElementStyle="{StaticResource DataGridTextElementStyle}"/>
+                <DataGridTextColumn Header="Stock" Binding="{Binding Stock}" ElementStyle="{StaticResource DataGridTextElementStyle}"/>
+                <DataGridTextColumn Header="Oferta" Binding="{Binding Oferta.Descripcion}" ElementStyle="{StaticResource DataGridTextElementStyle}"/>
+                <DataGridTextColumn Header="Categoria" Binding="{Binding Tipoproducto.Categoria}" ElementStyle="{StaticResource DataGridTextElementStyle}"/>
             </DataGrid.Columns>
             <!-- Editar/Eliminar Usuario -->
             <DataGrid.ContextMenu>

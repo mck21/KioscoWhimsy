@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Kiosco_Whimsy.Backend.Servicios
 {
-
     /// <summary>
-    /// Clase que contiene la lógica de negocio de la tabla Usuario
+    /// Servicio de Usuario que hereda los métodos para interactuar con 
+    /// la tabla Usuario en la base de datos
     /// </summary>
     public class UsuarioServicio : ServicioGenerico<Usuario>
     {
@@ -20,22 +20,21 @@ namespace Kiosco_Whimsy.Backend.Servicios
         private KioscoContext kioscoContext;
 
         /// <summary>
-        /// Variable que guarda el usuario que ha iniciado sesión
+        /// Usuario que ha iniciado sesion
         /// </summary>
         public Usuario usuLogin { get; set; }
 
         /// <summary>
-        /// Constructor que pasa el contexto de la base de datos
+        /// Constructor
         /// </summary>
-        /// <param name="kioscoContext"></param>
+        /// <param name="kioscoContext">Contexto de la base de datos</param>
         public UsuarioServicio(KioscoContext kioscoContext) : base(kioscoContext)
         {
             this.kioscoContext = kioscoContext;
         }
 
         /// <summary>
-        /// Método que comprueba las credenciales del usuario en la base de datos, ademas instancia las
-        /// claves ajenas de Rol y Persona
+        /// Método que comprueba las credenciales del usuario en la base de datos
         /// </summary>
         /// <param name="user">Username</param>
         /// <param name="pass">Password</param>
@@ -62,26 +61,5 @@ namespace Kiosco_Whimsy.Backend.Servicios
 
             return correcto;
         }
-
-
-        /// <summary>
-        /// Comprueba si en la base de datos existe un usuario con ese login
-        /// El login de un usuario debe de ser único
-        /// </summary>
-        /// <param name="usu">El nombre de usuario que se desea verificar</param>
-        /// <returns>
-        /// True si el nombre de usuario es único; 
-        /// de lo contrario, False
-        /// </returns>
-        public Boolean usuarioUnico(string usu)
-        {
-            bool unico = true;
-            if (kioscoContext.Set<Usuario>().Where(u => u.Username == usu).Count() > 0)
-            {
-                unico = false;
-            }
-            return unico;
-        }
-
     }
 }

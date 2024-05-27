@@ -16,10 +16,13 @@ using System.Windows.Shapes;
 namespace Kiosco_Whimsy.Frontend.ControlUsuario
 {
     /// <summary>
-    /// Lógica de interacción para UCCircuito.xaml
+    /// Lógica de interacción para UCCircuito.xaml (ventana de bienvenida)
     /// </summary>
     public partial class UCCircuito : UserControl
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public UCCircuito()
         {
             InitializeComponent();

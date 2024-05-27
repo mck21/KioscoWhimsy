@@ -20,6 +20,7 @@ namespace di.proyecto2023.Backend.Servicios
         /// Objeto que accede a la capa de acceso a datos creada por Entity Framework
         /// </summary>
         protected DbContext _entities;
+
         /// <summary>
         /// Objeto que nos permite acceder a las clases asociadas con las tablas de la base de datos
         /// </summary>
@@ -31,11 +32,11 @@ namespace di.proyecto2023.Backend.Servicios
         /// <param name="context">objeto que nos permite acceder a las clases asociadas a la base de datos</param>
         public ServicioGenerico(DbContext context)
         {
-            // Comprobamos que el parámetro no es nulo
             if (context == null) throw new ArgumentNullException("context");
             _entities = context;
             _dbset = context.Set<T>();
         }
+
         /// <summary>
         /// Inserta la entidad a la base de datos
         /// </summary>
@@ -45,15 +46,12 @@ namespace di.proyecto2023.Backend.Servicios
             bool correcto = true;
             try
             {
-                // Comprobación de que la entidad no es nula
                 if (entity == null)
                 {
-                    // Lanzamos la excepción
                     throw new ArgumentNullException("entity");
                 }
-                // Insertamos el objeto
                 _entities.Add(entity);
-                // Guardamos los cambios
+
                 Save();
             }
             catch (DbUpdateException dbex)
@@ -64,6 +62,7 @@ namespace di.proyecto2023.Backend.Servicios
             }
             return correcto;
         }
+
         /// <summary>
         /// Realiza un borrado de un elemento de la base de datos
         /// </summary>
@@ -72,27 +71,25 @@ namespace di.proyecto2023.Backend.Servicios
         {
             try
             {
-                // Comprobación de que la entidad no es nula
                 if (entity == null)
                 {
-                    // Lanzamos la excepción
                     throw new ArgumentNullException("entity");
                 }
-                // Insertamos el objeto
                 _entities.Remove(entity);
-                // Guardamos los cambios
+
                 Save();
             }
             catch (DbUpdateException dbex)
             {
-                // En caso de que se produzca una excepción se relanza
                 throw dbex;
             }
         }
+
         /// <summary>
         /// Devuelve una lista con todos los objetos de una tabla de la base de datos
         /// </summary>
         public List<T> GetAll { get { return _dbset.AsEnumerable<T>().ToList(); } }
+
         /// <summary>
         /// Realiza un commit de la cache a la base de datos
         /// </summary>
@@ -100,6 +97,7 @@ namespace di.proyecto2023.Backend.Servicios
         {
             _entities.SaveChanges();
         }
+
         /// <summary>
         /// Devuelve un objeto identificado por su id
         /// </summary>
@@ -107,9 +105,9 @@ namespace di.proyecto2023.Backend.Servicios
         /// <returns>Devuelve el objeto que coincide con el id</returns>
         public T FindByID(int id)
         {
-            // Devuelve la entidad en función del id
             return _dbset.Find(id);
         }
+
         /// <summary>
         /// Inserta o actualiza un objeto en la base de datos
         /// </summary>
@@ -118,27 +116,25 @@ namespace di.proyecto2023.Backend.Servicios
             bool correcto = true;
             try
             {
-                // Comprobación de que la entidad no es nula
                 if (entity == null)
                 {
-                    // Lanzamos la excepción
                     throw new ArgumentNullException("entity");
                 }
-                // Insertamos el objeto
                 _entities.Update(entity);
-                // Guardamos los cambios
+
                 Save();
             }
             catch (DbUpdateException dbex)
             {
                 correcto = false;
-                // En caso de que se produzca una excepción se relanza
+
                 throw dbex;
             }
             return correcto;
         }
+
         /// <summary>
-        /// Devuelve una lista de obketos que cumplen el criterio
+        /// Devuelve una lista de objetos que cumplen el criterio
         /// </summary>
         /// <param name="predicate">Criterio que deben de cumplir los objetos</param>
         /// <returns>Lista con los objetos que cumplen con el criterio</returns>

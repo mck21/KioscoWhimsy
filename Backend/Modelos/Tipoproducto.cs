@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace Kiosco_Whimsy.Backend.Modelos;
 
+/// <summary>
+/// POCO Tipoproducto
+/// </summary>
 public partial class Tipoproducto
 {
     public int Idtipoproducto { get; set; }

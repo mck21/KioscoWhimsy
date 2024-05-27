@@ -8,6 +8,19 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
+    <UserControl.Resources>
+        <Style x:Key="DataGridRowStyle" TargetType="DataGridRow">
+            <Setter Property="Background" Value="#690028"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style x:Key="DataGridColumnHeaderStyle" TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="#690028"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Padding" Value="16 6 6 6"/>
+        </Style>
+    </UserControl.Resources>
+    
     <DockPanel>
         <!-- Parte Superior -->
         <Grid DockPanel.Dock="Top">
@@ -32,9 +45,16 @@
         <!-- Parte Central -->
 
         <!-- Datos de los usuarios -->
-        <DataGrid x:Name="dgUsuarios" AutoGenerateColumns="False" ColumnWidth="*" CanUserAddRows="False" ItemsSource="{Binding listaUsuarios}">
+        <DataGrid x:Name="dgUsuarios" AutoGenerateColumns="False" ColumnWidth="*" CanUserAddRows="False" CanUserResizeColumns="True" ItemsSource="{Binding listaUsuarios}"
+                  RowStyle="{StaticResource DataGridRowStyle}" ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}">
+            <DataGrid.Background>
+                <LinearGradientBrush StartPoint="1,0" EndPoint="1,1">
+                    <GradientStop Color="#5e0023" Offset="0"/>
+                    <GradientStop Color="#23000f" Offset="1"/>
+                </LinearGradientBrush>
+            </DataGrid.Background>
             <DataGrid.Columns>
-                <DataGridTemplateColumn Header="Rol y nombre de usuario">
+                <DataGridTemplateColumn Header="Rol y nombre de usuario" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">

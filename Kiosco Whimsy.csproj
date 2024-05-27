@@ -15,13 +15,20 @@
     <None Remove="Recursos\Iconos\FaSolidCartPlusWhite.png" />
     <None Remove="Recursos\Iconos\FlowbiteUserSettingsSolid.png" />
     <None Remove="Recursos\Iconos\Logo1.ico" />
+    <None Remove="Recursos\Iconos\LucideUndoDot.png" />
+    <None Remove="Recursos\Iconos\MaterialSymbolsFilterAlt.png" />
+    <None Remove="Recursos\Iconos\MaterialSymbolsFilterAltOff.png" />
+    <None Remove="Recursos\Iconos\MaterialSymbolsListAltAddRounded.png" />
+    <None Remove="Recursos\Iconos\MaterialSymbolsPackage2Sharp.png" />
     <None Remove="Recursos\Iconos\MdiCloseCircleOutline.png" />
     <None Remove="Recursos\Iconos\MdiLockReset.png" />
+    <None Remove="Recursos\Iconos\MingcuteBillLine.png" />
     <None Remove="Recursos\Iconos\MingcuteUserAdd2Fill.png" />
     <None Remove="Recursos\Iconos\MingcuteUserAdd2FillWhite.png" />
     <None Remove="Recursos\Iconos\PajamasMaximize.png" />
     <None Remove="Recursos\Iconos\PajamasMinimize.png" />
     <None Remove="Recursos\Iconos\refresco.png" />
+    <None Remove="Recursos\Iconos\SolarChart2Bold.png" />
     <None Remove="Recursos\Iconos\SolarCheckCircleBold.png" />
     <None Remove="Recursos\Iconos\Sweet.png" />
     <None Remove="Recursos\Iconos\SweetLogo.png" />
@@ -35,6 +42,7 @@
     <None Remove="Recursos\Imagenes\comida.png" />
     <None Remove="Recursos\Imagenes\flag.png" />
     <None Remove="Recursos\Imagenes\helado.png" />
+    <None Remove="Recursos\Imagenes\herramientas - Copia.png" />
     <None Remove="Recursos\Imagenes\herramientas.png" />
     <None Remove="Recursos\Imagenes\juguetes.png" />
     <None Remove="Recursos\Imagenes\lectura.png" />
@@ -57,6 +65,30 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Recursos\Iconos\LucideUndoDot.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Recursos\Iconos\MaterialSymbolsFilterAlt.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Recursos\Iconos\MaterialSymbolsFilterAltOff.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Recursos\Iconos\MaterialSymbolsListAltAddRounded.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Recursos\Iconos\MaterialSymbolsPackage2Sharp.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Recursos\Iconos\MingcuteBillLine.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Recursos\Iconos\SolarChart2Bold.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Recursos\Imagenes\herramientas - Copia.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Recursos\Imagenes\revista.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -111,6 +143,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.6.0" />
+    <PackageReference Include="iTextSharp" Version="5.5.13.3" />
+    <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
     <PackageReference Include="MaterialDesignThemes.MahApps" Version="0.3.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.3">
@@ -125,10 +160,6 @@
     <PackageReference Include="NLog" Version="5.2.8" />
     <PackageReference Include="NLog.Config" Version="4.7.15" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Frontend\Informes\" />
   </ItemGroup>
 
   <ItemGroup>

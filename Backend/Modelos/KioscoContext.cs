@@ -5,6 +5,9 @@ using Pomelo.EntityFrameworkCore.MySql.Scaffolding.Internal;
 
 namespace Kiosco_Whimsy.Backend.Modelos;
 
+/// <summary>
+/// Contexto de la base de datos 
+/// </summary>
 public partial class KioscoContext : DbContext
 {
     public KioscoContext()
@@ -212,7 +215,7 @@ public partial class KioscoContext : DbContext
                 .HasMaxLength(50)
                 .HasColumnName("descripcion");
             entity.Property(e => e.Imagen)
-                .HasMaxLength(25)
+                .HasMaxLength(250)
                 .HasColumnName("imagen");
             entity.Property(e => e.Iva).HasColumnName("iva");
             entity.Property(e => e.OfertaId).HasColumnName("oferta_id");
@@ -260,7 +263,7 @@ public partial class KioscoContext : DbContext
                 .HasMaxLength(25)
                 .HasColumnName("categoria");
             entity.Property(e => e.Imagen)
-                .HasMaxLength(15)
+                .HasMaxLength(250)
                 .HasColumnName("imagen");
         });
 

@@ -163,14 +163,16 @@ namespace Kiosco_Whimsy
 
         private void btnVentas_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            btnMaximizar.IsEnabled = true;
             //le paso el contexto para que pueda usar panelCentral
-            UCRegistroVentas uc = new UCRegistroVentas(kioscoContext, mvUsuario.usuLogin, this);
+            UCRegistroVentas uc = new UCRegistroVentas(kioscoContext, mvUsuario, this);
             if (panelCentral.Children != null)
             {
                 panelCentral.Children.Clear();
                 panelCentral.Children.Add(uc);
             }
+
+            Window.GetWindow(this).WindowState = WindowState.Maximized;
+            btnMaximizar.IsEnabled = false;
         }
 
         private void btnStock_MouseDoubleClick(object sender, MouseButtonEventArgs e)

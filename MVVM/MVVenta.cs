@@ -4,8 +4,7 @@ using Kiosco_Whimsy.Backend.Servicios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Data;
 
 namespace Kiosco_Whimsy.MVVM
 {
@@ -13,32 +12,59 @@ namespace Kiosco_Whimsy.MVVM
     /// ViewModel para la gestión de ventas en la interfaz
     /// </summary>
     public class MVVenta : MVBaseCRUD<Venta>
-    {
+    {      
         /// <summary>
         /// Contexto de la base de datos
         /// </summary>
         private KioscoContext kioscoContext;
 
-
         /// <summary>
-        /// Capa de Servicio de Venta y de Producto
+        /// Capas de Servicio para Venta
         /// </summary>
         private VentaServicio ventaServ;
         private ProductoServicio prodServ;
         private TipoProductoServicio tipoProdServ;
+        private UsuarioServicio usuServ;
+        private ClienteServicio clienteServ;
 
+
+        /// <summary>
+        /// Venta a insertar en la base de datos
+        /// </summary>
+        private Venta _venta;
+        private DateTime _fechaVenta;
+
+        /// <summary>
+        /// Productos seleccionados para una venta
+        /// </summary>
+        private List<Detalleventa>? _listaDetalleVenta;
+        private ListCollectionView _listAuxDetalleVenta;
+
+        /// <summary>
+        /// Precio total de la venta
+        /// </summary>
+        private double _total;
 
         /// <summary>
         /// Variable que recoge el Usuario que ha iniciado sesion (empleado vendedor de la venta)
         /// </summary>
         private Usuario _usuLogin;
 
-        /// <summary>
-        /// Contador para que las imagenes solo carguen la ruta relativa una vez
-        /// Accesible desde cualquier clase, para que se pueda controlar el numero de veces
-        /// Cada vez que se instancia esta clase 
-        /// </summary>
-        public static bool yaHanSidoCargadas = false;
+        
+
+        public Tipoproducto categoriaSeleccionada;
+
+        //Filtros listaProductos
+        private List<Producto> _listaProductos;
+        private ListCollectionView listAux;
+        private Usuario _empleadoSeleccionado;
+        private DateTime? _fechaSeleccionada;
+
+        private List<Predicate<Venta>> criterios;
+        //cada uno de los criterios:
+        private Predicate<Venta> criterioEmpleado;
+        private Predicate<Venta> criterioFecha;
+
 
         /// <summary>
         /// Constructor que pasa el contexto de la base de datos y el usuario que ha iniciado 
@@ -48,21 +74,48 @@ namespace Kiosco_Whimsy.MVVM
         public MVVenta(KioscoContext kioscoContext, Usuario usuLogin)
         {
             this.kioscoContext = kioscoContext;
+            this._usuLogin = usuLogin;
 
+            inicializa();                   
+        }
+
+        /// <summary>
+        /// Instancia los servicios y variables necesarias
+        /// </summary>
+        private void inicializa()
+        {
             prodServ = new ProductoServicio(kioscoContext);
             tipoProdServ = new TipoProductoServicio(kioscoContext);
-
-            _usuLogin = usuLogin;
+            usuServ = new UsuarioServicio(kioscoContext);
+            clienteServ = new ClienteServicio(kioscoContext);
 
             servicio = new VentaServicio(kioscoContext);
             ventaServ = (VentaServicio)servicio;
 
-            if (!yaHanSidoCargadas)
-            {
-                cargarRutaRelativaDeImagenes();
-            }
-            
+            _venta = new Venta();
 
+            listAux = new ListCollectionView(ventaServ.GetAll);
+
+            _listaDetalleVenta = new List<Detalleventa>();
+            _listAuxDetalleVenta = new ListCollectionView(listaDetalleVenta);
+
+            _total = 0.00;
+
+            criterios = new List<Predicate<Venta>>();
+            inicializaCriterios();
+
+            _listaProductos = new List<Producto>(prodServ.GetAll.ToList());
+            FechaVenta = DateTime.Today;
+
+        }
+
+        /// <summary>
+        /// Venta a insertar en la base de datos
+        /// </summary>
+        public Venta venta
+        {
+            get { return _venta; }
+            set { _venta = value; NotifyPropertyChanged(nameof(venta)); }
         }
 
         /// <summary>
@@ -73,6 +126,14 @@ namespace Kiosco_Whimsy.MVVM
         {
             this.kioscoContext = kioscoContext;
 
+            inicializa2();
+        }
+
+        /// <summary>
+        /// Instancia los servicios y variables necesarias
+        /// </summary>
+        private void inicializa2()
+        {
             prodServ = new ProductoServicio(kioscoContext);
             tipoProdServ = new TipoProductoServicio(kioscoContext);
 
@@ -80,15 +141,90 @@ namespace Kiosco_Whimsy.MVVM
             ventaServ = (VentaServicio)servicio;
         }
 
+        /// <summary>
+        /// Variable de usuLogin pública para ser recogida por el Binding en la interfaz
+        /// </summary>
+        public Usuario usuLogin
+        {
+            get { return _usuLogin; }
+            set { _usuLogin = value; NotifyPropertyChanged(nameof(usuLogin)); }
+        }        
+
+        public List<Detalleventa> listaDetalleVenta
+        {
+            get { return _listaDetalleVenta; }
+            set
+            {
+                _listaDetalleVenta = value;
+                NotifyPropertyChanged(nameof(listaDetalleVenta));
+            }
+        }
+
+        public ListCollectionView listAuxDetalleVenta
+        {
+            get { return _listAuxDetalleVenta; }
+            set
+            {
+                _listAuxDetalleVenta = value;
+                NotifyPropertyChanged(nameof(listAuxDetalleVenta));
+            }
+        }
+
+        public double Total
+        {
+            get { return _total; }
+            set
+            {
+                _total = value;
+                NotifyPropertyChanged(nameof(Total));
+            }
+        }
+
+
+        public DateTime FechaVenta
+        {
+            get { return _fechaVenta; }
+            set
+            {
+                _fechaVenta = value;
+                NotifyPropertyChanged(nameof(FechaVenta));
+            }
+        }
+
+        /// <summary>
+        /// Listas públicas de todas las ventas, los usuarios y los productos
+        /// </summary>
+        public ListCollectionView listaVentas { get { return listAux; } }
+        public List<Tipoproducto> listaCategorias { get { return tipoProdServ.GetAll; } }
+        public List<Usuario> listaUsuarios { get { return usuServ.GetAll; } }
+        public List<Cliente> listaClientes { get { return clienteServ.GetAll; } }
+        public List<Producto> listaAllProductos
+        {
+            get { return prodServ.GetAll; }
+            set
+            {
+                NotifyPropertyChanged(nameof(listaAllProductos));
+            }
+        }
+        public List<Producto> listaProductos
+        {
+            get { return _listaProductos; }
+            set
+            {
+                _listaProductos = value;
+                NotifyPropertyChanged(nameof(listaProductos));
+            }
+        }
+
 
         /// <summary>
         /// Carga las rutas relativas donde se ubican las imagenes de los productos y categorías
         /// </summary>
-        private void cargarRutaRelativaDeImagenes()
+        public void cargarRutaRelativaDeImagenes()
         {
-            if (listaProductos != null)
+            if (listaAllProductos != null)
             {
-                foreach (var producto in listaProductos)
+                foreach (var producto in listaAllProductos)
                 {
                     if (producto.Imagen != null)
                     {
@@ -110,19 +246,82 @@ namespace Kiosco_Whimsy.MVVM
         }
 
         /// <summary>
-        /// Variable de usuLogin pública para ser recogida por el Binding en la interfaz
+        /// Método para calcular el total sumando los precios de los productos en la listaProductosSeleccionados
         /// </summary>
-        public Usuario usuLogin
+        public void calcularTotal()
         {
-            get { return _usuLogin; }
-            set { _usuLogin = value; NotifyPropertyChanged(nameof(usuLogin)); }
+            double total = 0;
+
+            if (_listaDetalleVenta != null && _listaDetalleVenta.Any())
+            {
+                foreach (var detalleventa in _listaDetalleVenta)
+                {
+                    int cantidad = detalleventa.Cantidad ?? 1;
+                    total += detalleventa.Producto.Precio * cantidad;
+                }
+            }
+
+            Total = total;
         }
 
         /// <summary>
-        /// Listas públicas de todas las ventas, los productos y las categorías
+        /// Logica de los criterios que sigue el filtro de categorias
         /// </summary>
-        public List<Venta> listaVentas { get { return ventaServ.GetAll; } }
-        public List<Producto> listaProductos { get { return prodServ.GetAll; } }
-        public List<Tipoproducto> listaCategorias { get { return tipoProdServ.GetAll; } }
+        private void inicializaCriterios()
+        {
+            criterioEmpleado = new Predicate<Venta>(v => v.Usuario != null && v.Usuario.Equals(empleadoSeleccionado));
+            criterioFecha = new Predicate<Venta>(v => v.Fecha != null && v.Fecha.Equals(fechaSeleccionada));
+        }
+
+        public Usuario empleadoSeleccionado
+        {
+            get { return _empleadoSeleccionado; }                             
+            set { _empleadoSeleccionado = value; NotifyPropertyChanged(nameof(empleadoSeleccionado)); }
+        }
+
+        public DateTime? fechaSeleccionada
+        {
+            get { return _fechaSeleccionada; }
+            set { _fechaSeleccionada = value; NotifyPropertyChanged(nameof(fechaSeleccionada)); }
+        }
+
+        private bool filtroCombinadoCriterios(object item)
+        {
+            bool correcto = true;
+            Venta venta = (Venta)item;
+            if (criterios.Count() != 0)
+            {
+                correcto = criterios.TrueForAll(x => x(venta));
+            }
+            return correcto;
+        }
+
+        private void addCriterios()
+        {
+            criterios.Clear();
+
+            if (empleadoSeleccionado != null)
+            {
+                criterios.Add(criterioEmpleado);
+            }
+
+            if (fechaSeleccionada != null)
+            {
+                criterios.Add(criterioFecha);
+            }
+
+        }
+
+        public void filtrar()
+        {
+            listaVentas.Filter = null;
+            addCriterios();
+            listaVentas.Filter = new Predicate<object>(filtroCombinadoCriterios);
+        }
+
+        public void limpiar()
+        {
+            listaProductos = listaAllProductos;
+        }
     }
 }

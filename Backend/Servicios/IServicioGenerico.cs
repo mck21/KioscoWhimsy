@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace di.proyecto2023.Backend.Servicios
 {
-    /*
-     * Interfaz que nos muestra las principales operaciones a realizar con los objetos 
-     * de la base de datos
-     */
+    /// <summary>
+    /// Interfaz que nos muestra las principales operaciones a realizar con los objetos de la base de datos
+    /// </summary>
     interface IServicioGenerico<T> where T : class
     {
         /// <summary>

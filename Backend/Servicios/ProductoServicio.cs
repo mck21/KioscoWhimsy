@@ -9,6 +9,10 @@ using System.Threading.Tasks;
 
 namespace Kiosco_Whimsy.Backend.Servicios
 {
+    /// <summary>
+    /// Servicio de Producto que hereda los métodos para interactuar con 
+    /// la tabla Producto en la base de datos
+    /// </summary>
     public class ProductoServicio : ServicioGenerico<Producto>
     {
         /// <summary>
@@ -17,9 +21,9 @@ namespace Kiosco_Whimsy.Backend.Servicios
         private KioscoContext kioscoContext;
 
         /// <summary>
-        /// Constructor que pasa el contexto de la base de datos
+        /// Constructor
         /// </summary>
-        /// <param name="kioscoContext"></param>
+        /// <param name="kioscoContext">Contexto de la base de datos</param>
         public ProductoServicio(KioscoContext kioscoContext) : base(kioscoContext)
         {
             this.kioscoContext = kioscoContext;

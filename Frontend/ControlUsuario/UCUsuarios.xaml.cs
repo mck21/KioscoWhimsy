@@ -23,9 +23,19 @@ namespace Kiosco_Whimsy.Frontend.ControlUsuario
     /// </summary>
     public partial class UCUsuarios : UserControl
     {
+        /// <summary>
+        /// Contexto de la base de datos
+        /// </summary>
         private KioscoContext kioscoContext;
+        /// <summary>
+        /// ViewModel de Usuario
+        /// </summary>
         private MVUsuario mvUsuario;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="kioscoContext">Contexto de la base de datos</param>
         public UCUsuarios(KioscoContext kioscoContext)
         {
             InitializeComponent();
@@ -33,6 +43,9 @@ namespace Kiosco_Whimsy.Frontend.ControlUsuario
             inicializa();
         }
 
+        /// <summary>
+        /// Método que instancia los objetos necesarios
+        /// </summary>
         private void inicializa()
         {
             mvUsuario = new MVUsuario(kioscoContext);

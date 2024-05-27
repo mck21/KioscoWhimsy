@@ -7,61 +7,108 @@
              xmlns:local="clr-namespace:Kiosco_Whimsy.Frontend.ControlUsuario"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <Style x:Key="DataGridRowStyle" TargetType="DataGridRow">
+            <Setter Property="Background" Value="#690028"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style x:Key="DataGridColumnHeaderStyle" TargetType="DataGridColumnHeader">
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Background" Value="#5e0023"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Padding" Value="6"/>
+        </Style>
+        <Style x:Key="DataGridTextElementStyle" TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Background" Value="#690028"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+    </UserControl.Resources>
+
     <DockPanel>
         <!-- Parte Superior -->
         <Grid DockPanel.Dock="Top">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="7*"/>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-
+            <Popup Placement="Center" IsOpen="False" x:Name="popEliminado">
+                <StackPanel Background="Green">
+                    <mat:PackIcon Kind="Delete" Margin="0 10 0 0"
+                                  HorizontalAlignment="Center"
+                                  Width="55" Height="35"
+                                  Foreground="White"/>  
+                    <TextBlock Text="Venta eliminada de la base de datos" Foreground="White" Margin="10"/>
+                </StackPanel>
+            </Popup>
             <StackPanel Orientation="Horizontal" Margin="10 10 0 0">
                 <mat:PackIcon Kind="Shop" Height="40" Width="40" Margin="6" Foreground="White"/>
                 <TextBlock Text="REGISTRO DE VENTAS" FontSize="24" Margin="10" FontWeight="Bold" Foreground="White"/>
             </StackPanel>
-            <Button x:Name="btnAnyadirVenta" Click="btnAnyadirVenta_Click" Grid.Column="1" Grid.Row="1" Height="40" Width="40"  Style="{DynamicResource MaterialDesignIconForegroundButton}">
-                <Image Source="/Recursos/Iconos/FaSolidCartPlus.png" Height="20" Width="20" />
-            </Button>
+            <StackPanel Orientation="Horizontal" Grid.Column="1">
+                <Button x:Name="btnAnyadirVenta" Click="btnAnyadirVenta_Click" Grid.Column="1" Height="40" Width="40"  Margin="0 0 15 0"
+                    Style="{DynamicResource MaterialDesignIconForegroundButton}">
+                    <Image Source="/Recursos/Iconos/FaSolidCartPlus.png" Height="20" Width="20"/>
+                </Button>
+                <Button x:Name="btnVentasPorMes" Click="btnVentasPorMes_Click" Grid.Column="2" Height="40" Width="40"  Margin="0 0 30 0"
+                    Style="{DynamicResource MaterialDesignIconForegroundButton}">
+                    <Image Source="/Recursos/Iconos/SolarChart2Bold.png" Height="20" Width="20"/>
+                </Button>
+            </StackPanel>
+           
 
             <!-- Filtros y búsquedas -->
             <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0 10 0 0">
-                <TextBlock Text="Busqueda por Empleado" Foreground="White" FontSize="15" Margin="20 0 0 10"/>
-                <TextBlock Text="Busqueda por Fecha (datepicker)" Foreground="White" FontSize="15" Margin="20 0 0 10"/>
+                <ComboBox x:Name="cbEmpleados" Width="160" Height="47" Margin="20 0 0 10" IsReadOnly="True" Foreground="White"
+                          ItemsSource="{Binding listaUsuarios}" SelectedItem="{Binding empleadoSeleccionado}"
+                          Style="{DynamicResource MaterialDesignFloatingHintComboBox}" DisplayMemberPath="Persona.Nombre" BorderBrush="#e60b60">
+                    <mat:HintAssist.Hint>
+                        <TextBlock Text="Empleado" FontSize="15" Foreground="Gray" />
+                    </mat:HintAssist.Hint>
+                </ComboBox>
+                <DatePicker x:Name="dpFecha" DisplayDate="" SelectedDateChanged="dpFecha_SelectedDateChanged" Width="160" Height="47" Foreground="White"  BorderBrush="#e60b60"
+                            Margin="35 0 0 10" Style="{DynamicResource MaterialDesignFloatingHintDatePicker}" SelectedDate="{Binding fechaSeleccionada}"> 
+                    <mat:HintAssist.Hint>
+                        <TextBlock Text="Fecha" FontSize="15" Foreground="Gray" Margin="0 0 0 10"/>
+                    </mat:HintAssist.Hint>
+                </DatePicker>
+                <Button x:Name="btnFiltrar" Click="btnFiltrar_Click" BorderBrush="Transparent" Background="Transparent" Width="25" Height="25" Margin="30 0 0 0"
+                        Style="{DynamicResource MaterialDesignIconForegroundButton}">
+                    <Image Source="/Recursos/Iconos/MaterialSymbolsFilterAlt.png" />
+                </Button>
+                <Button x:Name="btnClearFiltros" Click="btnClearFiltros_Click" BorderBrush="Transparent" Background="Transparent" Width="25" Height="25" Margin="30 0 0 0"
+                        Style="{DynamicResource MaterialDesignIconForegroundButton}">
+                    <Image Source="/Recursos/Iconos/MaterialSymbolsFilterAltOff.png" />
+                </Button>
             </StackPanel>
 
         </Grid>
 
         <!-- Datos de los usuarios -->
-        <DataGrid x:Name="dgVentas" AutoGenerateColumns="False" ColumnWidth="*" CanUserAddRows="False" ItemsSource="{Binding listaVentas}">            
+        <DataGrid x:Name="dgVentas" AutoGenerateColumns="False" ColumnWidth="*" CanUserAddRows="False" ItemsSource="{Binding listaVentas}"
+                  RowStyle="{StaticResource DataGridRowStyle}" ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}">
+            <DataGrid.Background>
+                <LinearGradientBrush StartPoint="1,0" EndPoint="1,1">
+                    <GradientStop Color="#5e0023" Offset="0"/>
+                    <GradientStop Color="#23000f" Offset="1"/>
+                </LinearGradientBrush>
+            </DataGrid.Background>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID Venta" Binding="{Binding Idventa}"/>
-                <DataGridTextColumn Header="Fecha" Binding="{Binding Fecha, StringFormat=dd/MM/yyyy}"/>
-                <DataGridTextColumn Header="Total" Binding="{Binding Total}"/>
-                <DataGridTextColumn Header="Empleado" Binding="{Binding Usuario.Persona.Nombre}"/>
-                <DataGridTemplateColumn Header="Cliente y CIF">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding Cliente.Persona.Nombre}"/>
-                                <TextBlock Text=": "/>
-                                <TextBlock Text="{Binding Cliente.Cif}"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>                
+                <DataGridTextColumn Header="ID Venta" Binding="{Binding Idventa}" ElementStyle="{StaticResource DataGridTextElementStyle}"/>
+                <DataGridTextColumn Header="Fecha" Binding="{Binding Fecha, StringFormat=dd/MM/yyyy}" ElementStyle="{StaticResource DataGridTextElementStyle}"/>
+                <DataGridTextColumn Header="Total" Binding="{Binding Total, StringFormat={}{0:F2} €}" ElementStyle="{StaticResource DataGridTextElementStyle}"/>
+                <DataGridTextColumn Header="Empleado" Binding="{Binding Usuario.Persona.Nombre}" ElementStyle="{StaticResource DataGridTextElementStyle}"/>
+                <DataGridTextColumn Header="CIF" Binding="{Binding Cliente.Cif}" ElementStyle="{StaticResource DataGridTextElementStyle}"/>                       
             </DataGrid.Columns>
             <!-- Editar/Eliminar Usuario -->
             <DataGrid.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="Editar" x:Name="btnEditarItem" Click="btnEditarItem_Click">
-                        <MenuItem.Icon>
-                            <mat:PackIcon Kind="Edit"/>
-                        </MenuItem.Icon>
-                    </MenuItem>
                     <MenuItem Header="Eliminar" x:Name="btnEliminarItem" Click="btnEliminarItem_Click" Foreground="Red" >
                         <MenuItem.Icon>
                             <mat:PackIcon Kind="Delete" Foreground="Red"/>
