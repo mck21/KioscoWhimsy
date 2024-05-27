@@ -18,18 +18,23 @@ namespace Kiosco_Whimsy.MVVM
     public class MVUsuario : MVBaseCRUD<Usuario>
     {
         /// <summary>
-        /// Capa de Servicio de Usuario y contexto de la base de datos
+        /// Contexto de la base de datos
+        /// </summary>
+        private KioscoContext kioscoContext;
+        /// <summary>
+        /// Capa de Servicio de Usuario
         /// </summary>
         private UsuarioServicio usuServ;
-        private KioscoContext kioscoContext;
 
         /// <summary>
-        /// Variable que recoge el Usuario que ha iniciado sesion del Servicio de Usuario
+        /// Usuario que ha iniciado sesion
         /// </summary>
         private Usuario _usuLogin;
 
-        //private ListCollectionView _listaUsuarios;
-
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="kioscoContext"></param>
         public MVUsuario(KioscoContext kioscoContext)
         {
             this.kioscoContext = kioscoContext;
@@ -37,12 +42,10 @@ namespace Kiosco_Whimsy.MVVM
             servicio = new UsuarioServicio(kioscoContext);
             usuServ = (UsuarioServicio)servicio;
 
-            //_listaUsuarios = new ListCollectionView(usuServ.GetAll); //*
         }
 
         /// <summary>
-        /// Constructor que pasa el contexto de la base de datos y el usuario que ha iniciado 
-        /// sesión
+        /// Constructor
         /// </summary>
         /// <param name="kioscoContext"></param>
         public MVUsuario(KioscoContext kioscoContext, Usuario usuLogin) 
@@ -57,7 +60,7 @@ namespace Kiosco_Whimsy.MVVM
         }        
 
         /// <summary>
-        /// Variable de usuLogin pública para ser recogida por el Binding en la interfaz
+        /// Usuario que ha iniciado sesión
         /// </summary>
         public Usuario usuLogin
         {
@@ -66,7 +69,7 @@ namespace Kiosco_Whimsy.MVVM
         }
 
         /// <summary>
-        /// Lista con todos los usuarios de la base de datos para recibirla en la interfaz
+        /// Lista de usuarios recibida en la interfaz
         /// </summary>
         public List<Usuario> listaUsuarios { get { return usuServ.GetAll; } }
 

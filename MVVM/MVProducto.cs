@@ -10,6 +10,9 @@ using System.Windows.Data;
 
 namespace Kiosco_Whimsy.MVVM
 {
+    /// <summary>
+    /// ViewModel para la gestión de productos en la interfaz
+    /// </summary>
     public class MVProducto : MVBaseCRUD<Producto>
     {
         /// <summary>
@@ -18,37 +21,49 @@ namespace Kiosco_Whimsy.MVVM
         private KioscoContext kioscoContext;
 
         /// <summary>
-        /// Capa de servicio de Producto
+        /// Servicio de producto
         /// </summary>
         private ProductoServicio prodServ;
 
         /// <summary>
-        /// new Producto a guardar en la base de datos
+        /// Producto a guardar en la base de datos
         /// </summary>
         private Producto _producto;
 
-        // Listas y servicios de los combobox        
+        // Listas y servicios de los combobox
+        /// <summary>
+        /// Lista de ubicaciones
+        /// </summary>
         private List<string> _listaUbicaciones = new List<string> { "Estante A", "Estante B", "Estante C", "Nevera", "Almacén" };
+        /// <summary>
+        /// Lista de imágenes
+        /// </summary>
         private List<string> _listaImagenes;
+
+        /// <summary>
+        /// Servicio de categoría
+        /// </summary>
         private TipoProductoServicio tipoProdServ;
+        /// <summary>
+        /// Servicio de Oferta
+        /// </summary>
         private OfertaServicio ofertaServ;
 
-        //Filtros listaProductos
         private ListCollectionView listAux;
-        public Tipoproducto categoriaSeleccionada;
 
-        private List<Predicate<Producto>> criterios;
-        //cada uno de los criterios:
-        private Predicate<Producto> criterioCategoria;
-
-        private List<Producto> _productosFiltrados;
-
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="kioscoContext"></param>
         public MVProducto(KioscoContext kioscoContext)
         {
             this.kioscoContext = kioscoContext;
             inicializa();
         }
 
+        /// <summary>
+        /// Instancia los servicios y variables necesarias
+        /// </summary>
         private void inicializa()
         {
             servicio = new ProductoServicio(kioscoContext);
@@ -59,11 +74,7 @@ namespace Kiosco_Whimsy.MVVM
             tipoProdServ = new TipoProductoServicio(kioscoContext);
             ofertaServ = new OfertaServicio(kioscoContext);
 
-            criterios = new List<Predicate<Producto>>();
-            inicializaCriterios();
-
             listAux = new ListCollectionView(prodServ.GetAll.ToList());
-            _productosFiltrados = new List<Producto>(prodServ.GetAll.ToList());
 
             _listaImagenes = new List<string>();
             cargarListaImagenes();
@@ -74,12 +85,17 @@ namespace Kiosco_Whimsy.MVVM
         /// </summary>
         public Producto producto
         {
-            get { return _producto; }                           
+            get { return _producto; }
             set { _producto = value; NotifyPropertyChanged(nameof(producto)); }
         }
 
-        //Listas para los combos
+        /// <summary>
+        /// Lista de ubicaciones
+        /// </summary>
         public List<string> listaUbicaciones { get { return _listaUbicaciones; } }
+        /// <summary>
+        /// Lista de imágenes
+        /// </summary>
         public List<string> listaImagenes
         {
             get { return _listaImagenes; }
@@ -89,8 +105,17 @@ namespace Kiosco_Whimsy.MVVM
                 NotifyPropertyChanged(nameof(listaImagenes));
             }
         }
+        /// <summary>
+        /// Lista de ofertas
+        /// </summary>
         public List<Oferta> listaOfertas { get { return ofertaServ.GetAll; } }
+        /// <summary>
+        /// Lista de categorías
+        /// </summary>
         public List<Tipoproducto> listaCategorias { get { return tipoProdServ.GetAll; } }
+        /// <summary>
+        /// Lista de todos los productos (aux)
+        /// </summary>
         public List<Producto> listaAllProductos
         {
             get { return prodServ.GetAll; }
@@ -99,58 +124,19 @@ namespace Kiosco_Whimsy.MVVM
                 NotifyPropertyChanged(nameof(listaAllProductos));
             }
         }
-        public List<Producto> listaProductosFiltrados
-        {
-            get { return _productosFiltrados; }
-            set
-            {
-                _productosFiltrados = value;
-                NotifyPropertyChanged(nameof(listaProductosFiltrados));
-            }
-        }
-        public List<Producto> listaProductos
-        {
-            get { return categoriaSeleccionada != null ? listaProductosFiltrados : listaAllProductos; }
-        }
+        /// <summary>
+        /// Lista de productos auxiliar
+        /// </summary>
         public ListCollectionView listaProductos2
         {
             get { return listAux; }
         }
 
-        private void inicializaCriterios()
-        {
-            criterioCategoria = new Predicate<Producto>(p => p.Tipoproducto != null && p.Tipoproducto.Equals(categoriaSeleccionada));
-        }
-
-        private bool filtroCombinadoCriterios(object item)
-        {
-            bool correcto = true;
-            Producto producto = (Producto)item;
-            if (criterios.Count() != 0)
-            {
-                correcto = criterios.TrueForAll(x => x(producto));
-            }
-            return correcto;
-        }
-
-        private void addCriterios()
-        {
-            criterios.Clear();
-
-            if (categoriaSeleccionada != null)
-            {
-                criterios.Add(criterioCategoria);
-            }
-
-        }
-
-        public void filtrar()
-        {
-            addCriterios();
-            listaProductosFiltrados = listaAllProductos.Where(p => filtroCombinadoCriterios(p)).ToList();
-            NotifyPropertyChanged(nameof(listaProductosFiltrados));
-        }
-
+        /// <summary>
+        /// Carga la lista de imágenes 
+        /// Si contiene ruta relativa, se la quita para hacer la inserción del producto
+        /// en la base de datos
+        /// </summary>
         public void cargarListaImagenes()
         {
             listaImagenes.Clear();
@@ -159,12 +145,11 @@ namespace Kiosco_Whimsy.MVVM
             {
                 if (!string.IsNullOrEmpty(producto.Imagen))
                 {
-                    //Si se habian cargado las rutas relativas (el usuario ha entrado primero en Ventas), se quita el prefijo de la ruta
                     if (producto.Imagen.StartsWith(@"/Recursos/Imagenes/"))
                     {
                         producto.Imagen = producto.Imagen.Replace(@"/Recursos/Imagenes/", "");
                     }
-                    
+
                     listaImagenes.Add(producto.Imagen);
                 }
             }
@@ -175,7 +160,6 @@ namespace Kiosco_Whimsy.MVVM
             {
                 if (!string.IsNullOrEmpty(categoria.Imagen))
                 {
-                    //Si se habian cargado las rutas relativas (el usuario ha entrado primero en Ventas), se quita el prefijo de la ruta
                     if (categoria.Imagen.StartsWith(@"/Recursos/Imagenes/"))
                     {
                         categoria.Imagen = categoria.Imagen.Replace(@"/Recursos/Imagenes/", "");
@@ -183,9 +167,8 @@ namespace Kiosco_Whimsy.MVVM
                 }
             }
 
-            
         }
 
-       
     }
+
 }

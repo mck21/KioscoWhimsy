@@ -24,11 +24,18 @@ namespace Kiosco_Whimsy.Frontend.Dialogos
     public partial class DialogoAnyadirProducto : MetroWindow
     {
         /// <summary>
-        /// ViewModel de Producto y contexto de la base de datos
+        /// Contexto de la base de datos
         /// </summary>
         private KioscoContext kioscoContext;
+        /// <summary>
+        /// ViewModel de Producto
+        /// </summary>
         private MVProducto mvProducto;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="kioscoContext"></param>
         public DialogoAnyadirProducto(KioscoContext kioscoContext)
         {
             InitializeComponent();
@@ -38,9 +45,13 @@ namespace Kiosco_Whimsy.Frontend.Dialogos
 
             this.AddHandler(Validation.ErrorEvent, new RoutedEventHandler(mvProducto.OnErrorEvent));
             mvProducto.btnGuardar = btnGuardar; 
-
         }
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="kioscoContext"></param>
+        /// <param name="productoSeleccionado"></param>
         public DialogoAnyadirProducto(KioscoContext kioscoContext, Producto productoSeleccionado)
         {
             InitializeComponent();
@@ -55,6 +66,11 @@ namespace Kiosco_Whimsy.Frontend.Dialogos
             mvProducto.producto = productoSeleccionado;
         }
 
+        /// <summary>
+        /// Botón para añadir el producto a la base de datos
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void btnGuardar_Click(object sender, RoutedEventArgs e)
         {
             if (mvProducto.IsValid(this))
@@ -85,10 +101,21 @@ namespace Kiosco_Whimsy.Frontend.Dialogos
             }
         }
 
+        /// <summary>
+        /// Botón para cerrar el dialogo
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
+
+        /// <summary>
+        /// Botón para cerrar el dialogo
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
 
         private void btnCerrar_Click(object sender, RoutedEventArgs e)
         {

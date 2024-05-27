@@ -18,24 +18,35 @@ namespace Kiosco_Whimsy.MVVM
         /// </summary>
         private KioscoContext kioscoContext;
 
+        // Capas de Servicio para Venta
         /// <summary>
-        /// Capas de Servicio para Venta
+        /// Servicio de venta
         /// </summary>
         private VentaServicio ventaServ;
+        /// <summary>
+        /// Servicio de producto
+        /// </summary>
         private ProductoServicio prodServ;
+        /// <summary>
+        /// Servicio de categoría
+        /// </summary>
         private TipoProductoServicio tipoProdServ;
+        /// <summary>
+        /// Servicio de usuario
+        /// </summary>
         private UsuarioServicio usuServ;
+        /// <summary>
+        /// Servicio de cliente
+        /// </summary>
         private ClienteServicio clienteServ;
-
 
         /// <summary>
         /// Venta a insertar en la base de datos
         /// </summary>
         private Venta _venta;
-        private DateTime _fechaVenta;
 
         /// <summary>
-        /// Productos seleccionados para una venta
+        /// Lista de productos seleccionados para una venta
         /// </summary>
         private List<Detalleventa>? _listaDetalleVenta;
         private ListCollectionView _listAuxDetalleVenta;
@@ -46,20 +57,33 @@ namespace Kiosco_Whimsy.MVVM
         private double _total;
 
         /// <summary>
-        /// Variable que recoge el Usuario que ha iniciado sesion (empleado vendedor de la venta)
+        /// Fecha de la venta
         /// </summary>
-        private Usuario _usuLogin;
+        private DateTime _fechaVenta;
 
-        
+        /// <summary>
+        /// Usuario que ha iniciado sesion (empleado vendedor de la venta)
+        /// </summary>
+        private Usuario _usuLogin;        
 
+        /// <summary>
+        /// Categoria seleccionada
+        /// </summary>
         public Tipoproducto categoriaSeleccionada;
 
-        //Filtros listaProductos
+        /// <summary>
+        /// Lista de Productos
+        /// </summary>
         private List<Producto> _listaProductos;
+
+        //Filtros listaProductos
         private ListCollectionView listAux;
         private Usuario _empleadoSeleccionado;
         private DateTime? _fechaSeleccionada;
 
+        /// <summary>
+        /// Lista de criterios
+        /// </summary>
         private List<Predicate<Venta>> criterios;
         //cada uno de los criterios:
         private Predicate<Venta> criterioEmpleado;
@@ -67,8 +91,7 @@ namespace Kiosco_Whimsy.MVVM
 
 
         /// <summary>
-        /// Constructor que pasa el contexto de la base de datos y el usuario que ha iniciado 
-        /// sesión e instancia los servicios, carga las rutas relativas de las imágenes (solo una vez)
+        /// Constructor
         /// </summary>
         /// <param name="kioscoContext"></param>
         public MVVenta(KioscoContext kioscoContext, Usuario usuLogin)
@@ -119,7 +142,7 @@ namespace Kiosco_Whimsy.MVVM
         }
 
         /// <summary>
-        /// Constructor que pasa el contexto de la base de datos e instancia los servicios
+        /// Constructor
         /// </summary>
         /// <param name="kioscoContext"></param>
         public MVVenta(KioscoContext kioscoContext)
@@ -142,7 +165,7 @@ namespace Kiosco_Whimsy.MVVM
         }
 
         /// <summary>
-        /// Variable de usuLogin pública para ser recogida por el Binding en la interfaz
+        /// Usuario que ha iniciado sesion
         /// </summary>
         public Usuario usuLogin
         {
@@ -150,6 +173,9 @@ namespace Kiosco_Whimsy.MVVM
             set { _usuLogin = value; NotifyPropertyChanged(nameof(usuLogin)); }
         }        
 
+        /// <summary>
+        /// Lista de detalle de venta
+        /// </summary>
         public List<Detalleventa> listaDetalleVenta
         {
             get { return _listaDetalleVenta; }
@@ -159,6 +185,10 @@ namespace Kiosco_Whimsy.MVVM
                 NotifyPropertyChanged(nameof(listaDetalleVenta));
             }
         }
+
+        /// <summary>
+        /// Lista de detalle de venta
+        /// </summary>
 
         public ListCollectionView listAuxDetalleVenta
         {
@@ -170,6 +200,9 @@ namespace Kiosco_Whimsy.MVVM
             }
         }
 
+        /// <summary>
+        /// Total de la venta
+        /// </summary>
         public double Total
         {
             get { return _total; }
@@ -180,7 +213,9 @@ namespace Kiosco_Whimsy.MVVM
             }
         }
 
-
+        /// <summary>
+        /// Fecha de la venta
+        /// </summary>
         public DateTime FechaVenta
         {
             get { return _fechaVenta; }
@@ -191,13 +226,26 @@ namespace Kiosco_Whimsy.MVVM
             }
         }
 
+        // Listas recogidas en la interfaz
         /// <summary>
-        /// Listas públicas de todas las ventas, los usuarios y los productos
+        /// Lista de ventas
         /// </summary>
         public ListCollectionView listaVentas { get { return listAux; } }
+        /// <summary>
+        /// Lista de categorias
+        /// </summary>
         public List<Tipoproducto> listaCategorias { get { return tipoProdServ.GetAll; } }
+        /// <summary>
+        /// Lista de usuarios
+        /// </summary>
         public List<Usuario> listaUsuarios { get { return usuServ.GetAll; } }
+        /// <summary>
+        /// Lista de clientes
+        /// </summary>
         public List<Cliente> listaClientes { get { return clienteServ.GetAll; } }
+        /// <summary>
+        /// Lista de todos los productos (auxiliar)
+        /// </summary>
         public List<Producto> listaAllProductos
         {
             get { return prodServ.GetAll; }
@@ -206,6 +254,9 @@ namespace Kiosco_Whimsy.MVVM
                 NotifyPropertyChanged(nameof(listaAllProductos));
             }
         }
+        /// <summary>
+        /// Lista de productos
+        /// </summary>
         public List<Producto> listaProductos
         {
             get { return _listaProductos; }
@@ -246,7 +297,7 @@ namespace Kiosco_Whimsy.MVVM
         }
 
         /// <summary>
-        /// Método para calcular el total sumando los precios de los productos en la listaProductosSeleccionados
+        /// Calcula el total sumando los precios de los productos en listaProductosSeleccionados
         /// </summary>
         public void calcularTotal()
         {
@@ -265,7 +316,7 @@ namespace Kiosco_Whimsy.MVVM
         }
 
         /// <summary>
-        /// Logica de los criterios que sigue el filtro de categorias
+        /// Criterios que siguen los filtros de registro de ventas
         /// </summary>
         private void inicializaCriterios()
         {
@@ -273,18 +324,29 @@ namespace Kiosco_Whimsy.MVVM
             criterioFecha = new Predicate<Venta>(v => v.Fecha != null && v.Fecha.Equals(fechaSeleccionada));
         }
 
+        /// <summary>
+        /// Empleado seleccionado en el comboBox
+        /// </summary>
         public Usuario empleadoSeleccionado
         {
             get { return _empleadoSeleccionado; }                             
             set { _empleadoSeleccionado = value; NotifyPropertyChanged(nameof(empleadoSeleccionado)); }
         }
 
+        /// <summary>
+        /// Fecha seleccionada en el datePicker
+        /// </summary>
         public DateTime? fechaSeleccionada
         {
             get { return _fechaSeleccionada; }
             set { _fechaSeleccionada = value; NotifyPropertyChanged(nameof(fechaSeleccionada)); }
         }
 
+        /// <summary>
+        /// Combina todos los criterios seleccionados
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         private bool filtroCombinadoCriterios(object item)
         {
             bool correcto = true;
@@ -296,6 +358,9 @@ namespace Kiosco_Whimsy.MVVM
             return correcto;
         }
 
+        /// <summary>
+        /// Añade los criterios a la lista de criterios
+        /// </summary>
         private void addCriterios()
         {
             criterios.Clear();
@@ -312,6 +377,9 @@ namespace Kiosco_Whimsy.MVVM
 
         }
 
+        /// <summary>
+        /// Filtra la lista de ventas según los criterios seleccionados
+        /// </summary>
         public void filtrar()
         {
             listaVentas.Filter = null;
@@ -319,6 +387,9 @@ namespace Kiosco_Whimsy.MVVM
             listaVentas.Filter = new Predicate<object>(filtroCombinadoCriterios);
         }
 
+        /// <summary>
+        /// Quita los filtros y vuelve a mostrar todas las ventas
+        /// </summary>
         public void limpiar()
         {
             listaProductos = listaAllProductos;

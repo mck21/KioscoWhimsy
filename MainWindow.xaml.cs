@@ -28,9 +28,12 @@ namespace Kiosco_Whimsy
     public partial class MainWindow : Window
     {
         /// <summary>
-        /// Contexto de la base de datos y viewModel de usuario
+        /// Contexto de la base de datos
         /// </summary>
         private KioscoContext kioscoContext;
+        /// <summary>
+        /// ViewModel de Usuario
+        /// </summary>
         private MVUsuario mvUsuario;
 
         /// <summary>
@@ -42,9 +45,8 @@ namespace Kiosco_Whimsy
         }
 
         /// <summary>
-        /// Constructor que pasa el contexto de la base de datos, el usuario que ha iniciado sesión 
-        /// y el viewModel de usuario que despues instancia con el contexto de la base de datos
-        /// Además, modifica la visibilidad de las funciones de la ventana principal dependiendo del 
+        /// Constructor 
+        /// Modifica la visibilidad de las funciones de la ventana principal dependiendo del 
         /// rol del usuario que ha iniciado sesión
         /// </summary>
         /// <param name="kioscoContext"></param>
@@ -68,7 +70,6 @@ namespace Kiosco_Whimsy
                 panelCentral.Children.Add(uc);
             }
 
-            // Mostrar u ocultar botones según el rol del usuario
             switch (usuLogin.Rol.NombreRol)
             {
                 case "Gerente":
@@ -77,24 +78,11 @@ namespace Kiosco_Whimsy
                 case "Encargado":
 
                     btnUsuarios.Visibility = Visibility.Collapsed;
-                    /*
-                    btnGestionContraseñas.Visibility = Visibility.Collapsed;
-                    btnEdicionPermisos.Visibility = Visibility.Collapsed;
-                    btnEdicionRoles.Visibility = Visibility.Collapsed;
-                    */
                     break;
                 case "Empleado":
 
                     btnUsuarios.Visibility = Visibility.Collapsed;
                     btnCampanyasPublicidad.Visibility = Visibility.Collapsed;
-                    /*
-                    btnGestionContraseñas.Visibility = Visibility.Collapsed;
-                    btnEdicionPermisos.Visibility = Visibility.Collapsed;
-                    btnEdicionRoles.Visibility = Visibility.Collapsed;                    
-                    btnModificarProducto.Visibility = Visibility.Collapsed;
-                    btnEliminarProducto.Visibility = Visibility.Collapsed;
-                    btnDevolucionVenta.Visibility = Visibility.Collapsed;
-                    */
                     break;
                 default:
                     break;
@@ -131,7 +119,7 @@ namespace Kiosco_Whimsy
         }
 
         /// <summary>
-        /// Boton para abrir el dialogo para modificar la contraseña del usuario
+        /// Boton que abre el dialogo para modificar la contraseña del usuario
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -142,7 +130,7 @@ namespace Kiosco_Whimsy
         }
 
         /// <summary>
-        /// Boton para volver a la pantalla de inicio
+        /// Boton para ir a la pantalla de inicio
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -161,9 +149,13 @@ namespace Kiosco_Whimsy
             panelCentral.Children.Add(logo);
         }
 
+        /// <summary>
+        /// Botón que abre el Registro de Ventas
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnVentas_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            //le paso el contexto para que pueda usar panelCentral
             UCRegistroVentas uc = new UCRegistroVentas(kioscoContext, mvUsuario, this);
             if (panelCentral.Children != null)
             {
@@ -175,6 +167,11 @@ namespace Kiosco_Whimsy
             btnMaximizar.IsEnabled = false;
         }
 
+        /// <summary>
+        /// Botón que abre la gestión del stock
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnStock_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             btnMaximizar.IsEnabled = true;
@@ -187,6 +184,11 @@ namespace Kiosco_Whimsy
             }
         }
 
+        /// <summary>
+        /// Botón que abre la gestión de usuarios
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnUsuarios_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             btnMaximizar.IsEnabled = true;
@@ -200,7 +202,7 @@ namespace Kiosco_Whimsy
         }
 
         /// <summary>
-        /// Boton que lleva a la pagina para crear un story en Facebook para realizar 
+        /// Botón que lleva a crear un story en Facebook para realizar 
         /// un post publicitario
         /// La URL se abre en el navegador predeterminado
         /// </summary>
@@ -208,10 +210,8 @@ namespace Kiosco_Whimsy
         /// <param name="e"></param>
         private void btnCampanyasPublicidad_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            // URL a la pagina de crear un story en Facebook
             string url = "https://www.facebook.com/stories/create";
 
-            // Abrir enlace en el navegador predeterminado
             try
             {
                 ProcessStartInfo psi = new ProcessStartInfo

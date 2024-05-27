@@ -24,19 +24,21 @@ namespace Kiosco_Whimsy.Frontend.Dialogos
     public partial class DialogoCambioContrasenya : MetroWindow
     {
         /// <summary>
-        /// ViewModel de Usuario y contexto de la base de datos
+        /// Contexto de la base de datos
         /// </summary>
         private KioscoContext kioscoContext;
+        /// <summary>
+        /// ViewModel de Usuario
+        /// </summary>
         private MVUsuario mvUsuario;
 
         /// <summary>
-        /// Variable que recibirá el usuario que ha iniciado sesión
+        /// Usuario que ha iniciado sesión
         /// </summary>
         private Usuario usuLogin;
 
         /// <summary>
-        /// Constructor que recibe el contexto de la base de datos y el usuario que ha iniciado sesión
-        /// y asigna al mvUsuario como DataContext
+        /// Constructor
         /// </summary>
         /// <param name="kioscoContext"></param>
         /// <param name="usuLogin"></param>
@@ -50,7 +52,7 @@ namespace Kiosco_Whimsy.Frontend.Dialogos
         }
 
         /// <summary>
-        /// Botón para cerrar la ventana
+        /// Botón para cerrar el diálogo
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -60,7 +62,7 @@ namespace Kiosco_Whimsy.Frontend.Dialogos
         }
 
         /// <summary>
-        /// Botón para cerrar la ventana
+        /// Botón para cerrar el diálogo
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -89,9 +91,6 @@ namespace Kiosco_Whimsy.Frontend.Dialogos
                         await Task.Delay(TimeSpan.FromSeconds(3));
                         DialogResult = true;
                         Close();
-                        /*mvUsuario.listaUsuarios.EditItem(mvUsuario);
-                        mvUsuario.listaUsuarios.CommitEdit();
-                        mvUsuario.listaUsuarios.Refresh();*/
                     }
                     else
                     {

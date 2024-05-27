@@ -32,7 +32,7 @@ namespace Kiosco_Whimsy.Frontend.Login
         private KioscoContext kioscoContext;
 
         /// <summary>
-        /// Constructor, si hay conexion con la base de datos lanza la aplicacion
+        /// Si hay conexion con la base de datos lanza la aplicacion
         /// si no, lanza un mensaje de error
         /// </summary>
         public Login()
@@ -73,7 +73,7 @@ namespace Kiosco_Whimsy.Frontend.Login
 
         /// <summary>
         /// Boton que abre la ventana principal si las credenciales de usuario coinciden con las de la base de datos
-        /// En caso de ser incorrectas o de que el usuario deje campos vacios, salta un mensaje de error (MahApps)
+        /// En caso de ser incorrectas o de que el usuario deje campos vacios, salta un mensaje de error
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

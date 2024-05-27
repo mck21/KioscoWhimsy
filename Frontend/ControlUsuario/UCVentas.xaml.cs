@@ -276,7 +276,6 @@ namespace Kiosco_Whimsy.Frontend.ControlUsuario
         {
             if (sender is MahApps.Metro.Controls.NumericUpDown numericUpDown)
             {
-                // Obtén el contexto de datos (Detalleventa) del NumericUpDown
                 var detalleVenta = numericUpDown.DataContext as Detalleventa;
 
                 if (detalleVenta != null)
@@ -300,10 +299,6 @@ namespace Kiosco_Whimsy.Frontend.ControlUsuario
                         numericUpDown.IsEnabled = false;
 
                         detalleVenta.Producto.Stock = 0;
-
-                        popStockInsuficiente.IsOpen = true;
-                        await Task.Delay(TimeSpan.FromSeconds(3));
-                        popStockInsuficiente.IsOpen = false;
                     }
 
                 }

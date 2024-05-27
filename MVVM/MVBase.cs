@@ -11,6 +11,9 @@ using System.Windows.Controls;
 
 namespace di.proyecto2023.MVVM
 {
+    /// <summary>
+    /// Clase madre de la que heredan el resto de ViewModels
+    /// </summary>
     public class MVBase : PropertyChangedDataError
     {
         /// <summary>
@@ -23,7 +26,8 @@ namespace di.proyecto2023.MVVM
         /// </summary>
         private int errorCount;
 
-        // Añade métodos que nos ayudan en la validación -------------------------------------------------------------------------------
+        // Validación:
+
         /// <summary>
         /// Método que nos permite saber si hay errores en algún formulario
         /// </summary>

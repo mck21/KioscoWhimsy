@@ -10,6 +10,11 @@ using System.Threading.Tasks;
 
 namespace di.proyecto2023.MVVM
 {
+    /// <summary>
+    /// Implementa los métodos para hacer las operaciones básicas con la base de datos
+    /// Guarda los logs de las operaciones
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class MVBaseCRUD<T> : MVBase
         where T : class
     {
