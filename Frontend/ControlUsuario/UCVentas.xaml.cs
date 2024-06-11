@@ -222,7 +222,7 @@ namespace Kiosco_Whimsy.Frontend.ControlUsuario
                     popCorrecto.IsOpen = false;
 
                     Grid panelCentral = mainWindow.PanelCentral;
-                    UCProductos uc = new UCProductos(kioscoContext);
+                    UCVentas uc = new UCVentas(kioscoContext, mvVenta.usuLogin, mainWindow);
                     if (panelCentral.Children != null)
                     {
                         panelCentral.Children.Clear();

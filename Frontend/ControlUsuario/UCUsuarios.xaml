@@ -49,18 +49,20 @@
                   RowStyle="{StaticResource DataGridRowStyle}" ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}">
             <DataGrid.Background>
                 <LinearGradientBrush StartPoint="1,0" EndPoint="1,1">
-                    <GradientStop Color="#5e0023" Offset="0"/>
-                    <GradientStop Color="#23000f" Offset="1"/>
+                    <GradientStop Color="#690028" Offset="0"/>
+                    <GradientStop Color="#350014" Offset="1"/>
                 </LinearGradientBrush>
             </DataGrid.Background>
             <DataGrid.Columns>
-                <DataGridTemplateColumn Header="Rol y nombre de usuario" >
+                <DataGridTemplateColumn Header="Nombre de usuario y contraseña" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="{Binding Rol.NombreRol}"/>
                                 <TextBlock Text=": "/>
                                 <TextBlock Text="{Binding Username}"/>
+                                <TextBlock Text=" - "/>
+                                <TextBlock Text="{Binding Password}"/>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>

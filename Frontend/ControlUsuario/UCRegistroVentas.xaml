@@ -69,13 +69,13 @@
                           ItemsSource="{Binding listaUsuarios}" SelectedItem="{Binding empleadoSeleccionado}"
                           Style="{DynamicResource MaterialDesignFloatingHintComboBox}" DisplayMemberPath="Persona.Nombre" BorderBrush="#e60b60">
                     <mat:HintAssist.Hint>
-                        <TextBlock Text="Empleado" FontSize="15" Foreground="Gray" />
+                        <TextBlock Text="Empleado" FontSize="15" Foreground="White" />
                     </mat:HintAssist.Hint>
                 </ComboBox>
                 <DatePicker x:Name="dpFecha" DisplayDate="" SelectedDateChanged="dpFecha_SelectedDateChanged" Width="160" Height="47" Foreground="White"  BorderBrush="#e60b60"
                             Margin="35 0 0 10" Style="{DynamicResource MaterialDesignFloatingHintDatePicker}" SelectedDate="{Binding fechaSeleccionada}"> 
                     <mat:HintAssist.Hint>
-                        <TextBlock Text="Fecha" FontSize="15" Foreground="Gray" Margin="0 0 0 10"/>
+                        <TextBlock Text="Fecha" FontSize="15" Foreground="White" Margin="0 0 0 10"/>
                     </mat:HintAssist.Hint>
                 </DatePicker>
                 <Button x:Name="btnFiltrar" Click="btnFiltrar_Click" BorderBrush="Transparent" Background="Transparent" Width="25" Height="25" Margin="30 0 0 0"
@@ -95,8 +95,8 @@
                   RowStyle="{StaticResource DataGridRowStyle}" ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}">
             <DataGrid.Background>
                 <LinearGradientBrush StartPoint="1,0" EndPoint="1,1">
-                    <GradientStop Color="#5e0023" Offset="0"/>
-                    <GradientStop Color="#23000f" Offset="1"/>
+                    <GradientStop Color="#690028" Offset="0"/>
+                    <GradientStop Color="#350014" Offset="1"/>
                 </LinearGradientBrush>
             </DataGrid.Background>
             <DataGrid.Columns>

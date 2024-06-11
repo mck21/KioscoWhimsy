@@ -6,6 +6,10 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>Recursos\Iconos\SweetLogo.ico</ApplicationIcon>
+    <BaseOutputPath>\bin</BaseOutputPath>
+    <ProduceReferenceAssembly>True</ProduceReferenceAssembly>
+    <GenerateDocumentationFile>False</GenerateDocumentationFile>
+    <DocumentationFile>C:\Users\Usuario\Desktop\Whimsy\Documentacion\docu.txt</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

@@ -15,7 +15,7 @@ public partial class Producto : PropertyChangedDataError
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Idproducto { get; set; }
 
-    [Required(ErrorMessage = "El campo Decripción es obligatorio")]
+    [Required(ErrorMessage = "El campo Descripción es obligatorio")]
     [MaxLength(50)]
     [MinLength(1)]
     public string? Descripcion { get; set; }

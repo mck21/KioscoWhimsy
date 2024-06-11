@@ -77,19 +77,25 @@ namespace Kiosco_Whimsy.Frontend.ControlUsuario
                 if (productoAEliminar != null)
                 {
 
+                    MessageBox.Show("Se eliminarán también todos los resumenes de venta donde aparezca este producto", "GESTIÓN PRODUCTOS", MessageBoxButton.OK, MessageBoxImage.Information);                    
+
+                    var detalleVentas = kioscoContext.Detalleventa.Where(dv => dv.ProductoId == productoAEliminar.Idproducto).ToList();
+                    kioscoContext.Detalleventa.RemoveRange(detalleVentas);
+                    kioscoContext.SaveChanges();
+
                     if (mvProducto.delete(productoAEliminar))
                     {
-                        dgProductos.Items.Refresh();
 
                         popEliminado.IsOpen = true;
                         await Task.Delay(TimeSpan.FromSeconds(3));
-                        popEliminado.IsOpen = false;                       
+                        popEliminado.IsOpen = false;
 
+                        dgProductos.Items.Refresh();
                         mvProducto.listaProductos2.Refresh();
                     }
                     else
                     {
-                        MessageBox.Show("No se puede eliminar de la base de datos\"", "GESTION PRODUCTOS", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("No se puede eliminar de la base de datos", "GESTIÓN PRODUCTOS", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
 
                 }
