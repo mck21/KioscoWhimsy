@@ -1,6 +1,9 @@
 # TPV Kiosco Whimsy
 
-**Proyecto de software para la gestión de un terminal de punto de venta (TPV)**
+<div align="center">
+  <img src="https://github.com/mck21/KioscoWhimsy/blob/master/Recursos/Imagenes/whimsyHeader.png"/>
+</div>
+<br>
 
 Este proyecto es una solución para la gestión de ventas, inventarios, usuarios y clientes de un kiosco. Desarrollado como proyecto final del Ciclo Superior de Desarrollo de Aplicaciones Multiplataforma, implementa el patrón de diseño MVVM y tecnologías como WPF y .NET.
 Para una descripción más detallada y con imágenes visita la [Documentación completa](https://github.com/mck21/KioscoWhimsy/blob/master/WhimsyDoc.pdf)
@@ -11,15 +14,14 @@ Para una descripción más detallada y con imágenes visita la [Documentación c
 2. [Características](#características)
 3. [Stack Tecnológico](#stack-tecnológico)
 4. [Estructura del Proyecto](#estructura-del-proyecto)
-5. [Base de Datos](#base-de-datos)
-6. [Guía de Instalación](#guía-de-instalación)
-7. [Manual de Usuario](#manual-de-usuario)
-8. [Contribuciones](#contribuciones)
-9. [Licencia](#licencia)
+5. [Guía de Instalación](#guía-de-instalación)
+6. [Manual de Usuario](#manual-de-usuario)
+7. [Contribuciones](#contribuciones)
+8. [Licencia](#licencia)
 
 ## Descripción del Proyecto
 
-El proyecto TPV Kiosco Whimsy está diseñado para satisfacer las necesidades de un kiosco de ventas, permitiendo la gestión de ventas, inventarios, y usuarios. La aplicación, de fácil manejo e interfaz amigable, optimiza las tareas del día a día en un entorno de venta al por menor.
+El proyecto TPV Kiosco Whimsy cubre las necesidades de un kiosco de ventas, permitiendo la gestión de ventas, inventarios, y usuarios. La aplicación optimiza las tareas del día a día en un entorno de venta al por menor.
 
 ## Características
 
