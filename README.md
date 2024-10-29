@@ -46,13 +46,21 @@ El proyecto TPV Kiosco Whimsy cubre las necesidades de un kiosco de ventas, perm
   - **MaterialDesignThemes y Mahapps**: Personalización y estilo de ventanas.
 
 ## Estructura del Proyecto
-
-El proyecto se divide en las siguientes carpetas:
-
-- **Backend**: Lógica de negocio y servicios, modelos de la base de datos.
-- **Frontend**: Interfaz de usuario, gráficos, controles y diálogos.
-- **Recursos**: Iconos e imágenes.
-- **ViewModels**: Enlaza los modelos y las vistas, siguiendo el patrón MVVM.
+```.
+├── Backend
+│   ├── Modelos
+│   └── Servicios
+├── Frontend
+│   ├── Charts
+│   ├── ControlUsuario
+│   ├── Dialogos
+│   └── Login
+├── Recursos
+│   ├── GIF
+│   ├── Iconos
+│   └── Imagenes
+└── ViewModels
+```
 
 ## Guía de Instalación
 
@@ -65,8 +73,8 @@ El proyecto se divide en las siguientes carpetas:
      ```bash
      git clone https://github.com/mck21/KioscoWhimsy.git
      ```
+   - Crea la base de datos en MySQL Workbench con este script: [kiosco.sql](https://github.com/mck21/KioscoWhimsy/blob/master/kiosco.sql).
    - Configura la base de datos en `KioscoContext.cs` en el proyecto.
-   - Ejecuta las migraciones de EntityFramework para configurar las tablas en MySQL.
    - Inicia la aplicación desde Visual Studio.
 
 ## Manual de Usuario
