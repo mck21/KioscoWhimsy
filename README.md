@@ -15,9 +15,8 @@ Para una descripción más detallada y con imágenes visita la [Documentación c
 3. [Stack Tecnológico](#stack-tecnológico)
 4. [Estructura del Proyecto](#estructura-del-proyecto)
 5. [Guía de Instalación](#guía-de-instalación)
-6. [Manual de Usuario](#manual-de-usuario)
-7. [Contribuciones](#contribuciones)
-8. [Licencia](#licencia)
+6. [Contribuciones](#contribuciones)
+7. [Licencia](#licencia)
 
 ## Descripción del Proyecto
 
@@ -76,13 +75,6 @@ El proyecto TPV Kiosco Whimsy cubre las necesidades de un kiosco de ventas, perm
    - Crea la base de datos en MySQL Workbench con este script: [kiosco.sql](https://github.com/mck21/KioscoWhimsy/blob/master/kiosco.sql).
    - Configura la base de datos en `KioscoContext.cs` en el proyecto.
    - Inicia la aplicación desde Visual Studio.
-
-## Manual de Usuario
-
-- **Inicio de sesión**: Inicia sesión con un usuario registrado (user: admin, password: admin).
-- **Pantalla de ventas**: Selecciona productos, ajusta cantidades y confirma la venta.
-- **Inventario**: Administra productos en stock.
-- **Gestión de usuarios**: Asigna roles y gestiona permisos (solo para administradores).
 
 ## Contribuciones
 
