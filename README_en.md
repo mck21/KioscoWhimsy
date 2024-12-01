@@ -2,8 +2,9 @@
 
 <div align="center">
   <img src="https://github.com/mck21/KioscoWhimsy/blob/master/Recursos/Imagenes/whimsyHeader.png"/>
+  <a href="https://github.com/mck21/KioscoWhimsy/blob/master/README_en.md">🇪🇸 - Español</a>
 </div>
-<br>
+<br><br>
 
 This project is a solution for managing sales, inventory, users, and customers for a kiosk. Developed as the final project for the Cross-Platform Application Development program, it implements the MVVM design pattern and technologies such as WPF and .NET.  
 For a more detailed description with screenshots, visit the [Complete Documentation](https://github.com/mck21/KioscoWhimsy/blob/master/WhimsyDoc.pdf) (only available in spanish)
