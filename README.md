@@ -4,6 +4,9 @@
   <img src="https://github.com/mck21/KioscoWhimsy/blob/master/Recursos/Imagenes/whimsyHeader.png"/>
 </div>
 <br>
+# [English](https://github.com/mck21/KioscoWhimsy/blob/master/README_en.md)
+
+<br><br>
 
 Este proyecto es una solución para la gestión de ventas, inventarios, usuarios y clientes de un kiosco. Desarrollado como proyecto final del Ciclo Superior de Desarrollo de Aplicaciones Multiplataforma, implementa el patrón de diseño MVVM y tecnologías como WPF y .NET.
 Para una descripción más detallada y con imágenes visita la [Documentación completa](https://github.com/mck21/KioscoWhimsy/blob/master/WhimsyDoc.pdf)
